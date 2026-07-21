@@ -106,17 +106,44 @@ function useCuentaRegresiva(diaObjetivo, horaInicio = 5) {
   return restante
 }
 
+const LOGO_CANDIDATOS = [
+  '/logo-cac.jpeg',
+  '/logo-cac.jpg',
+  '/logo-cac.JPG',
+  '/logo-cac.JPEG',
+  '/logo-cac.png',
+  '/logo-cac.PNG',
+]
+
+function LogoCAC() {
+  const [intento, setIntento] = useState(0)
+
+  if (intento >= LOGO_CANDIDATOS.length) {
+    // Ninguna ruta funcionó: se muestra el sello de respaldo dibujado en CSS
+    return (
+      <span className="barra__sello" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </span>
+    )
+  }
+
+  return (
+    <img
+      className="barra__logo"
+      src={LOGO_CANDIDATOS[intento]}
+      alt="Logo del Centro Agrícola Cantonal de Acosta"
+      width="40"
+      height="40"
+      onError={() => setIntento((i) => i + 1)}
+    />
+  )
+}
+
 function Barra() {
   return (
     <header className="barra">
       <div className="barra__marca">
-        <img
-          className="barra__logo"
-          src="/logo-cac.jpg"
-          alt="Logo del Centro Agrícola Cantonal de Acosta"
-          width="40"
-          height="40"
-        />
+        <LogoCAC />
         CAC ACOSTA
       </div>
       <nav className="barra__nav">
@@ -319,4 +346,3 @@ export default function App() {
     </div>
   )
 }
-
