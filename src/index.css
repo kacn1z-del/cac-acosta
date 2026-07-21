@@ -5,12 +5,12 @@
    ============================================================ */
 
 :root {
-  --tierra: #5E3527;
-  --tierra-oscuro: #3E2219;
-  --cultivo: #7CAA4C;
-  --cultivo-oscuro-solid: #578130;
-  --cielo: #2F5F98;
-  --cielo-oscuro: #1F4470;
+  --tierra: #5E3120;
+  --tierra-oscuro: #3E1F14;
+  --cultivo: #71AC41;
+  --cultivo-oscuro-solid: #4F7A2D;
+  --cielo: #0A67A6;
+  --cielo-oscuro: #084E80;
   --papel: #F3ECDC;
   --papel-alto: #EAE1CB;
   --tinta: #241C15;
@@ -105,19 +105,12 @@ button {
   color: var(--tierra);
 }
 
-.barra__sello {
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  display: flex;
-  overflow: hidden;
-  border: 2px solid var(--tinta);
+.barra__logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
   flex-shrink: 0;
 }
-.barra__sello span { flex: 1; }
-.barra__sello span:nth-child(1) { background: var(--tierra); }
-.barra__sello span:nth-child(2) { background: var(--cultivo); }
-.barra__sello span:nth-child(3) { background: var(--cielo); }
 
 .barra__nav {
   display: flex;
