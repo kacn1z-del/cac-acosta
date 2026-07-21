@@ -18,8 +18,8 @@
   --maduro-oscuro: #B06E1D;
   --linea: rgba(36, 28, 21, 0.14);
 
-  --fuente-stencil: 'Big Shoulders Stencil', sans-serif;
-  --fuente-cuerpo: 'Work Sans', system-ui, sans-serif;
+  --fuente-stencil: 'Inter', system-ui, sans-serif;
+  --fuente-cuerpo: 'Inter', system-ui, sans-serif;
   --fuente-dato: 'JetBrains Mono', monospace;
 
   color-scheme: light;
@@ -201,10 +201,11 @@ button {
 
 .hero__titulo {
   font-family: var(--fuente-stencil);
-  font-weight: 900;
-  font-size: clamp(48px, 8vw, 92px);
-  line-height: 0.92;
-  letter-spacing: 0.01em;
+  font-weight: 800;
+  font-size: clamp(40px, 7vw, 76px);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
   margin: 0 0 20px;
   color: var(--tierra);
 }
@@ -230,29 +231,28 @@ button {
 
 .boton {
   border: none;
-  border-radius: 8px;
-  padding: 14px 24px;
+  border-radius: 4px;
+  padding: 14px 26px;
   font-weight: 700;
-  font-size: 15px;
-  letter-spacing: 0.01em;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  font-size: 14.5px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  transition: background 0.15s ease, transform 0.1s ease;
 }
-.boton:hover { transform: translateY(-2px); }
-.boton:active { transform: translateY(0); }
+.boton:active { transform: scale(0.98); }
 
 .boton--principal {
   background: var(--maduro);
-  color: var(--tinta);
-  box-shadow: 4px 4px 0 var(--tierra);
+  color: #fff;
 }
-.boton--principal:hover { box-shadow: 6px 6px 0 var(--tierra); }
+.boton--principal:hover { background: var(--maduro-oscuro); }
 
 .boton--fantasma {
   background: transparent;
   color: var(--tierra);
   border: 2px solid var(--tierra);
 }
-.boton--fantasma:hover { background: rgba(94,53,39,0.06); }
+.boton--fantasma:hover { background: var(--tierra); color: #fff; }
 
 /* Sello rotado — elemento firma */
 .hero__saco {
@@ -323,11 +323,13 @@ button {
 
 .seccion__titulo {
   font-family: var(--fuente-stencil);
-  font-weight: 700;
-  font-size: clamp(30px, 4vw, 44px);
+  font-weight: 800;
+  font-size: clamp(26px, 3.6vw, 38px);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
   color: var(--tierra);
   margin: 0;
-  line-height: 1;
+  line-height: 1.05;
 }
 
 .seccion__nota {
@@ -346,49 +348,48 @@ button {
 }
 
 .cajon {
-  border: 2px solid var(--tinta);
-  background: #fff;
-  border-radius: 6px;
-  padding: 16px 14px;
+  border: none;
+  background: var(--tierra);
+  color: #fff;
+  border-radius: 4px;
+  padding: 18px 16px;
   text-align: left;
   position: relative;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
-  box-shadow: 3px 3px 0 var(--linea);
+  transition: background 0.15s ease;
 }
 .cajon:hover {
-  transform: translateY(-3px);
-  box-shadow: 5px 5px 0 var(--cultivo);
+  background: var(--tierra-oscuro);
 }
 .cajon[aria-pressed="true"] {
-  background: var(--tierra);
-  color: var(--papel);
-  border-color: var(--tierra);
-  box-shadow: 5px 5px 0 var(--maduro);
+  background: var(--cultivo-oscuro-solid);
 }
-.cajon[aria-pressed="true"] .cajon__distrito { color: var(--papel); }
-.cajon[aria-pressed="true"] .cajon__dia { color: var(--maduro); }
+.cajon[aria-pressed="true"] .cajon__distrito { color: #fff; }
+.cajon[aria-pressed="true"] .cajon__dia { color: #fff; }
 
 .cajon__dia {
   display: block;
   font-family: var(--fuente-stencil);
-  font-weight: 700;
-  font-size: 20px;
-  color: var(--tierra);
+  font-weight: 800;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--maduro);
   margin-bottom: 6px;
 }
 .cajon__distrito {
   display: block;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
-  color: var(--tinta);
+  color: #fff;
 }
 
 .panel-dia {
   margin-top: 22px;
-  border: 2px solid var(--tinta);
-  border-radius: 10px;
+  border: none;
+  border-radius: 6px;
   padding: 26px 28px;
   background: #fff;
+  box-shadow: 0 1px 3px rgba(36,28,21,0.12);
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 24px;
@@ -417,7 +418,9 @@ button {
 
 .panel-dia__titulo {
   font-family: var(--fuente-stencil);
-  font-size: 24px;
+  font-weight: 800;
+  font-size: 22px;
+  text-transform: uppercase;
   color: var(--tierra);
   margin: 0 0 6px;
 }
@@ -467,20 +470,23 @@ button {
   margin-bottom: 28px;
 }
 .filtro {
-  border: 2px solid var(--tinta);
+  border: 2px solid var(--tierra);
   background: transparent;
-  border-radius: 999px;
+  color: var(--tierra);
+  border-radius: 4px;
   padding: 8px 16px;
-  font-size: 13.5px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
   display: inline-flex;
   align-items: center;
   gap: 8px;
   transition: background 0.15s ease, color 0.15s ease;
 }
 .filtro[aria-pressed="true"] {
-  background: var(--cultivo-oscuro-solid);
-  border-color: var(--cultivo-oscuro-solid);
+  background: var(--tierra);
+  border-color: var(--tierra);
   color: #fff;
 }
 
@@ -492,13 +498,13 @@ button {
 
 .puesto {
   border: 1px solid var(--linea);
-  border-radius: 12px;
+  border-radius: 4px;
   background: #fff;
   padding: 22px;
-  transition: transform 0.15s ease, border-color 0.15s ease;
+  transition: box-shadow 0.15s ease, border-color 0.15s ease;
 }
 .puesto:hover {
-  transform: translateY(-3px);
+  box-shadow: 0 2px 8px rgba(36,28,21,0.1);
   border-color: var(--cultivo);
 }
 .puesto__icono {
@@ -508,7 +514,9 @@ button {
 }
 .puesto__nombre {
   font-family: var(--fuente-stencil);
-  font-size: 19px;
+  font-weight: 700;
+  font-size: 17px;
+  text-transform: uppercase;
   color: var(--tierra);
   margin: 0 0 6px;
 }
@@ -545,7 +553,9 @@ button {
 }
 .cta-productor__titulo {
   font-family: var(--fuente-stencil);
-  font-size: clamp(26px, 4vw, 36px);
+  font-weight: 800;
+  font-size: clamp(24px, 3.6vw, 32px);
+  text-transform: uppercase;
   margin: 0 0 10px;
 }
 .cta-productor__texto {
@@ -559,7 +569,9 @@ button {
   background: var(--papel);
   color: var(--cielo-oscuro);
   white-space: nowrap;
-  box-shadow: 4px 4px 0 var(--tierra-oscuro);
+}
+.boton--claro:hover {
+  background: #fff;
 }
 
 /* ---------- Pie ---------- */
