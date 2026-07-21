@@ -110,9 +110,13 @@ function Barra() {
   return (
     <header className="barra">
       <div className="barra__marca">
-        <span className="barra__sello" aria-hidden="true">
-          <span></span><span></span><span></span>
-        </span>
+        <img
+          className="barra__logo"
+          src="/logo-cac.jpg"
+          alt="Logo del Centro Agrícola Cantonal de Acosta"
+          width="40"
+          height="40"
+        />
         CAC ACOSTA
       </div>
       <nav className="barra__nav">
