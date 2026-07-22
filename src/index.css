@@ -1,25 +1,28 @@
 /* ============================================================
-   CAC ACOSTA — sistema de diseño
-   Tierra #5E3527 · Cultivo #7CAA4C · Cielo #2F5F98
-   Papel  #F3ECDC · Tinta  #241C15 · Maduro #D98A2B
+   CAC ACOSTA — sistema de diseño (refresco visual, paleta viva)
+   Tierra #4A2513 · Cultivo #45B02A · Altura #0684C4
+   Papel  #F5E9C8 · Tinta  #241A10 · Madura #E63E23 · Oro #F0A422
+   Estarcido: Big Shoulders Stencil Display (títulos)
+   Cuerpo: Karla · Dato: JetBrains Mono
    ============================================================ */
 
 :root {
-  --tierra: #5E3120;
-  --tierra-oscuro: #3E1F14;
-  --cultivo: #71AC41;
-  --cultivo-oscuro-solid: #4F7A2D;
-  --cielo: #0A67A6;
-  --cielo-oscuro: #084E80;
-  --papel: #F3ECDC;
-  --papel-alto: #EAE1CB;
-  --tinta: #241C15;
-  --maduro: #D98A2B;
-  --maduro-oscuro: #B06E1D;
-  --linea: rgba(36, 28, 21, 0.14);
+  --tierra: #4A2513;
+  --tierra-oscuro: #2E160A;
+  --cultivo: #45B02A;
+  --cultivo-oscuro-solid: #2E8A1A;
+  --cielo: #0684C4;
+  --cielo-oscuro: #04618F;
+  --papel: #F5E9C8;
+  --papel-alto: #EBDBAE;
+  --tinta: #241A10;
+  --maduro: #E63E23;
+  --maduro-oscuro: #B92C16;
+  --oro: #F0A422;
+  --linea: rgba(36, 26, 16, 0.18);
 
-  --fuente-stencil: 'Inter', system-ui, sans-serif;
-  --fuente-cuerpo: 'Inter', system-ui, sans-serif;
+  --fuente-estarcido: 'Big Shoulders Stencil Display', 'Arial Narrow', sans-serif;
+  --fuente-cuerpo: 'Karla', system-ui, sans-serif;
   --fuente-dato: 'JetBrains Mono', monospace;
 
   color-scheme: light;
@@ -69,8 +72,9 @@ button {
 .pagina {
   overflow-x: hidden;
   background-image:
-    radial-gradient(circle at 100% 0%, rgba(124, 170, 76, 0.10), transparent 45%),
-    radial-gradient(circle at 0% 100%, rgba(47, 95, 152, 0.08), transparent 50%);
+    radial-gradient(circle at 100% 0%, rgba(69, 176, 42, 0.16), transparent 45%),
+    radial-gradient(circle at 0% 100%, rgba(6, 132, 196, 0.13), transparent 50%),
+    repeating-linear-gradient(115deg, rgba(62,36,22,0.025) 0px, rgba(62,36,22,0.025) 1px, transparent 1px, transparent 5px);
 }
 
 .envoltura {
@@ -85,23 +89,23 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 24px;
+  padding: 16px 24px;
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(243, 236, 220, 0.86);
-  backdrop-filter: blur(6px);
-  border-bottom: 1px solid var(--linea);
+  background: rgba(239, 228, 204, 0.88);
+  backdrop-filter: blur(8px);
+  border-bottom: 2px dashed var(--linea);
 }
 
 .barra__marca {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-family: var(--fuente-stencil);
+  gap: 12px;
+  font-family: var(--fuente-estarcido);
   font-weight: 700;
-  font-size: 22px;
-  letter-spacing: 0.02em;
+  font-size: 24px;
+  letter-spacing: 0.04em;
   color: var(--tierra);
 }
 
@@ -110,6 +114,8 @@ button {
   height: 40px;
   object-fit: contain;
   flex-shrink: 0;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px var(--papel), 0 0 0 3px var(--tierra);
 }
 .barra__sello {
   width: 34px;
@@ -119,6 +125,7 @@ button {
   overflow: hidden;
   border: 2px solid var(--tinta);
   flex-shrink: 0;
+  transform: rotate(-6deg);
 }
 .barra__sello span { flex: 1; }
 .barra__sello span:nth-child(1) { background: var(--tierra); }
@@ -127,9 +134,11 @@ button {
 
 .barra__nav {
   display: flex;
-  gap: 22px;
-  font-size: 14px;
-  font-weight: 600;
+  gap: 26px;
+  font-size: 13.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 .barra__nav a {
   text-decoration: none;
@@ -157,16 +166,17 @@ button {
 
 .hero {
   position: relative;
-  padding: 64px 0 96px;
+  padding: 60px 0 92px;
+  overflow: hidden;
 }
 
 .hero__grano {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.5;
+  opacity: 0.6;
   background-image:
-    repeating-linear-gradient(115deg, rgba(94,53,39,0.035) 0px, rgba(94,53,39,0.035) 2px, transparent 2px, transparent 6px);
+    repeating-linear-gradient(115deg, rgba(62,36,22,0.04) 0px, rgba(62,36,22,0.04) 2px, transparent 2px, transparent 6px);
 }
 
 .hero__contenido {
@@ -183,30 +193,42 @@ button {
   }
 }
 
+@keyframes surgir {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero__contenido > * {
+  animation: surgir 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.hero__contenido > *:nth-child(2) {
+  animation-delay: 0.12s;
+}
+
 .hero__eyebrow {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   font-family: var(--fuente-dato);
-  font-size: 12.5px;
-  letter-spacing: 0.12em;
+  font-size: 12px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--cultivo-oscuro-solid);
-  background: rgba(124, 170, 76, 0.14);
-  border: 1px solid rgba(124, 170, 76, 0.4);
+  color: var(--maduro-oscuro);
+  background: rgba(240, 164, 34, 0.18);
+  border: 1px dashed rgba(240, 164, 34, 0.7);
   padding: 6px 12px;
   border-radius: 999px;
   margin-bottom: 22px;
 }
 
 .hero__titulo {
-  font-family: var(--fuente-stencil);
+  font-family: var(--fuente-estarcido);
   font-weight: 800;
-  font-size: clamp(40px, 7vw, 76px);
-  line-height: 1.02;
-  letter-spacing: -0.01em;
+  font-size: clamp(42px, 7.5vw, 82px);
+  line-height: 0.98;
+  letter-spacing: 0.01em;
   text-transform: uppercase;
-  margin: 0 0 20px;
+  margin: 0 0 22px;
   color: var(--tierra);
 }
 .hero__titulo em {
@@ -216,7 +238,7 @@ button {
 
 .hero__texto {
   font-size: 17px;
-  line-height: 1.6;
+  line-height: 1.65;
   max-width: 46ch;
   color: var(--tinta);
   opacity: 0.86;
@@ -231,28 +253,32 @@ button {
 
 .boton {
   border: none;
-  border-radius: 4px;
+  border-radius: 3px;
   padding: 14px 26px;
-  font-weight: 700;
-  font-size: 14.5px;
-  letter-spacing: 0.02em;
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  transition: background 0.15s ease, transform 0.1s ease;
+  transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
 }
-.boton:active { transform: scale(0.98); }
+.boton:active { transform: scale(0.97); }
 
 .boton--principal {
   background: var(--maduro);
   color: #fff;
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,0.14);
 }
-.boton--principal:hover { background: var(--maduro-oscuro); }
+.boton--principal:hover {
+  background: var(--maduro-oscuro);
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,0.14), 0 4px 14px rgba(162,57,42,0.35);
+}
 
 .boton--fantasma {
   background: transparent;
   color: var(--tierra);
-  border: 2px solid var(--tierra);
+  border: 2px dashed var(--tierra);
 }
-.boton--fantasma:hover { background: var(--tierra); color: #fff; }
+.boton--fantasma:hover { background: var(--tierra); color: #fff; border-style: solid; }
 
 /* Sello rotado — elemento firma */
 .hero__saco {
@@ -265,8 +291,13 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  transform: rotate(-8deg);
+  transform: rotate(-9deg);
   background: var(--papel-alto);
+  animation: surgir 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both, sello-flota 7s ease-in-out infinite;
+}
+@keyframes sello-flota {
+  0%, 100% { transform: rotate(-9deg) translateY(0); }
+  50% { transform: rotate(-7deg) translateY(-6px); }
 }
 .hero__saco::before {
   content: '';
@@ -275,8 +306,15 @@ button {
   border-radius: 50%;
   border: 2px solid var(--tierra);
 }
+.hero__saco::after {
+  content: '';
+  position: absolute;
+  inset: 22px;
+  border-radius: 50%;
+  border: 1px dotted rgba(62,36,22,0.5);
+}
 .hero__saco-texto {
-  font-family: var(--fuente-stencil);
+  font-family: var(--fuente-estarcido);
   font-weight: 700;
   text-align: center;
   color: var(--tierra);
@@ -284,7 +322,8 @@ button {
 }
 .hero__saco-texto strong {
   display: block;
-  font-size: 30px;
+  font-size: 32px;
+  letter-spacing: 0.02em;
 }
 .hero__saco-texto span {
   display: block;
@@ -293,14 +332,14 @@ button {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   margin-top: 4px;
-  opacity: 0.75;
+  opacity: 0.8;
 }
 
 /* ---------- Secciones genéricas ---------- */
 
 .seccion {
-  padding: 72px 0;
-  border-top: 1px solid var(--linea);
+  padding: 76px 0;
+  border-top: 2px dashed var(--linea);
 }
 
 .seccion__cabecera {
@@ -308,28 +347,28 @@ button {
   align-items: flex-end;
   justify-content: space-between;
   gap: 20px;
-  margin-bottom: 36px;
+  margin-bottom: 38px;
   flex-wrap: wrap;
 }
 
 .seccion__etiqueta {
   font-family: var(--fuente-dato);
-  font-size: 12.5px;
-  letter-spacing: 0.14em;
+  font-size: 12px;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--cielo-oscuro);
   margin: 0 0 8px;
 }
 
 .seccion__titulo {
-  font-family: var(--fuente-stencil);
+  font-family: var(--fuente-estarcido);
   font-weight: 800;
-  font-size: clamp(26px, 3.6vw, 38px);
+  font-size: clamp(28px, 3.8vw, 42px);
   text-transform: uppercase;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.015em;
   color: var(--tierra);
   margin: 0;
-  line-height: 1.05;
+  line-height: 1.02;
 }
 
 .seccion__nota {
@@ -351,28 +390,30 @@ button {
   border: none;
   background: var(--tierra);
   color: #fff;
-  border-radius: 4px;
+  border-radius: 3px;
   padding: 18px 16px;
   text-align: left;
   position: relative;
-  transition: background 0.15s ease;
+  transition: background 0.15s ease, transform 0.15s ease;
 }
 .cajon:hover {
   background: var(--tierra-oscuro);
+  transform: translateY(-2px);
 }
 .cajon[aria-pressed="true"] {
   background: var(--cultivo-oscuro-solid);
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,0.2);
 }
 .cajon[aria-pressed="true"] .cajon__distrito { color: #fff; }
 .cajon[aria-pressed="true"] .cajon__dia { color: #fff; }
 
 .cajon__dia {
   display: block;
-  font-family: var(--fuente-stencil);
-  font-weight: 800;
-  font-size: 16px;
+  font-family: var(--fuente-estarcido);
+  font-weight: 700;
+  font-size: 17px;
   text-transform: uppercase;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.04em;
   color: var(--maduro);
   margin-bottom: 6px;
 }
@@ -389,7 +430,7 @@ button {
   border-radius: 6px;
   padding: 26px 28px;
   background: #fff;
-  box-shadow: 0 1px 3px rgba(36,28,21,0.12);
+  box-shadow: 0 2px 0 var(--linea), 0 6px 18px rgba(36,26,16,0.10);
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 24px;
@@ -417,12 +458,13 @@ button {
 }
 
 .panel-dia__titulo {
-  font-family: var(--fuente-stencil);
-  font-weight: 800;
-  font-size: 22px;
+  font-family: var(--fuente-estarcido);
+  font-weight: 700;
+  font-size: 24px;
   text-transform: uppercase;
   color: var(--tierra);
   margin: 0 0 6px;
+  letter-spacing: 0.01em;
 }
 .panel-dia__meta {
   font-size: 14px;
@@ -431,7 +473,7 @@ button {
 }
 .panel-dia__meta strong { color: var(--cultivo-oscuro-solid); }
 
-/* ---------- Cuenta regresiva ---------- */
+/* ---------- Cuenta regresiva (reservado) ---------- */
 
 .cuenta {
   display: grid;
@@ -473,17 +515,18 @@ button {
   border: 2px solid var(--tierra);
   background: transparent;
   color: var(--tierra);
-  border-radius: 4px;
+  border-radius: 3px;
   padding: 8px 16px;
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.04em;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  transition: background 0.15s ease, color 0.15s ease;
+  transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease;
 }
+.filtro:hover { transform: translateY(-1px); }
 .filtro[aria-pressed="true"] {
   background: var(--tierra);
   border-color: var(--tierra);
@@ -497,15 +540,16 @@ button {
 }
 
 .puesto {
-  border: 1px solid var(--linea);
+  border: 1px dashed var(--linea);
   border-radius: 4px;
   background: #fff;
   padding: 22px;
-  transition: box-shadow 0.15s ease, border-color 0.15s ease;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 .puesto:hover {
-  box-shadow: 0 2px 8px rgba(36,28,21,0.1);
+  box-shadow: 0 8px 20px rgba(36,26,16,0.12);
   border-color: var(--cultivo);
+  transform: translateY(-3px) rotate(-0.4deg);
 }
 .puesto__icono {
   font-size: 30px;
@@ -513,12 +557,13 @@ button {
   display: block;
 }
 .puesto__nombre {
-  font-family: var(--fuente-stencil);
+  font-family: var(--fuente-estarcido);
   font-weight: 700;
-  font-size: 17px;
+  font-size: 18px;
   text-transform: uppercase;
   color: var(--tierra);
   margin: 0 0 6px;
+  letter-spacing: 0.01em;
 }
 .puesto__desc {
   font-size: 13.5px;
@@ -533,7 +578,10 @@ button {
   font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--cielo-oscuro);
+  color: #fff;
+  background: var(--cielo);
+  padding: 3px 9px;
+  border-radius: 999px;
 }
 
 /* ---------- CTA vendedores ---------- */
@@ -541,27 +589,30 @@ button {
 .cta-productor {
   background: var(--cielo);
   color: #fff;
-  border-radius: 18px;
+  border-radius: 16px;
   padding: 48px;
   display: grid;
   grid-template-columns: 1.4fr auto;
   gap: 32px;
   align-items: center;
+  position: relative;
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,0.08);
 }
 @media (max-width: 720px) {
   .cta-productor { grid-template-columns: 1fr; padding: 32px 26px; }
 }
 .cta-productor__titulo {
-  font-family: var(--fuente-stencil);
+  font-family: var(--fuente-estarcido);
   font-weight: 800;
-  font-size: clamp(24px, 3.6vw, 32px);
+  font-size: clamp(26px, 3.8vw, 36px);
   text-transform: uppercase;
   margin: 0 0 10px;
+  letter-spacing: 0.01em;
 }
 .cta-productor__texto {
   font-size: 15px;
   line-height: 1.6;
-  opacity: 0.9;
+  opacity: 0.92;
   max-width: 52ch;
   margin: 0;
 }
@@ -577,7 +628,7 @@ button {
 /* ---------- Pie ---------- */
 
 .pie {
-  border-top: 1px solid var(--linea);
+  border-top: 2px dashed var(--linea);
   padding: 40px 0 30px;
   font-size: 13.5px;
 }
@@ -594,5 +645,5 @@ button {
   flex-wrap: wrap;
   font-family: var(--fuente-dato);
   font-size: 12px;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
 }
