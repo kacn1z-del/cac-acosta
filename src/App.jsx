@@ -1,9 +1,18 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 
-/* ---------------------------------------------------------------
-   DATOS — edite aquí la información real de cada feria distrital.
+/* =================================================================
+   DATOS REALES — Centro Agrícola Cantonal de Acosta
    dia: 0=domingo … 6=sábado (para el cálculo de la cuenta regresiva)
-   --------------------------------------------------------------- */
+   ================================================================= */
+
+const NAV = [
+  { id: 'inicio', label: 'Inicio' },
+  { id: 'nosotros', label: 'Nosotros' },
+  { id: 'ferias', label: 'Ferias' },
+  { id: 'puestos', label: 'Puestos' },
+  { id: 'contacto', label: 'Contacto' },
+]
+
 const FERIAS = [
   {
     id: 'san-ignacio',
@@ -64,8 +73,33 @@ const PUESTOS = [
   { nombre: 'Panadería Doña Flor', categoria: 'Panadería', icono: '🍞', desc: 'Pan casero, empanadas y rosquillas de horno de leña.' },
   { nombre: 'Taller Guaitil Artesanal', categoria: 'Artesanía', icono: '🧺', desc: 'Canastos de mimbre y piezas talladas por manos locales.' },
   { nombre: 'Cafetal Cangrejal', categoria: 'Café', icono: '☕', desc: 'Café orgánico certificado, en grano o molido.' },
-  { nombre: 'Raíces de Acosta', categoria: 'Verduras', icono: '🥕' , desc: 'Yuca, camote, ñame y tubérculos de la zona.' },
+  { nombre: 'Raíces de Acosta', categoria: 'Verduras', icono: '🥕', desc: 'Yuca, camote, ñame y tubérculos de la zona.' },
 ]
+
+const PILARES = [
+  {
+    num: '01',
+    titulo: 'Misión',
+    texto:
+      'Conectar al productor de Acosta directamente con quien consume, sin intermediarios, garantizando precio justo y producto fresco.',
+  },
+  {
+    num: '02',
+    titulo: 'Visión',
+    texto:
+      'Ser el punto de encuentro semanal de referencia entre el campo y las familias del cantón, en San Ignacio y sus cuatro distritos.',
+  },
+  {
+    num: '03',
+    titulo: 'Valores',
+    texto:
+      'Trabajo directo de finca a mesa, respaldo a la agricultura familiar y fortalecimiento de la economía local de Acosta.',
+  },
+]
+
+/* =================================================================
+   HOOKS
+   ================================================================= */
 
 function diasHastaProximo(diaObjetivo) {
   const hoy = new Date()
@@ -106,6 +140,44 @@ function useCuentaRegresiva(diaObjetivo, horaInicio = 5) {
   return restante
 }
 
+/** Revela un bloque con fade + slide cuando entra en pantalla (efecto suave, estilo editorial) */
+function useReveal(threshold = 0.14) {
+  const ref = useRef(null)
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setVisible(true)
+      },
+      { threshold }
+    )
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [threshold])
+
+  return { ref, visible }
+}
+
+function Reveal({ children, delay = 0, className = '' }) {
+  const { ref, visible } = useReveal()
+  return (
+    <div
+      ref={ref}
+      className={`reveal ${visible ? 'reveal--visible' : ''} ${className}`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      {children}
+    </div>
+  )
+}
+
+/* =================================================================
+   LOGO
+   ================================================================= */
+
 const LOGO_CANDIDATOS = [
   '/logo-cac.jpeg',
   '/logo-cac.jpg',
@@ -115,134 +187,323 @@ const LOGO_CANDIDATOS = [
   '/logo-cac.PNG',
 ]
 
-function LogoCAC() {
+function LogoCAC({ tamano = 36 }) {
   const [intento, setIntento] = useState(0)
 
   if (intento >= LOGO_CANDIDATOS.length) {
-    // Ninguna ruta funcionó: se muestra el sello de respaldo dibujado en CSS
     return (
-      <span className="barra__sello" aria-hidden="true">
-        <span></span><span></span><span></span>
-      </span>
+      <div className="logo-respaldo" style={{ width: tamano, height: tamano }}>
+        CA
+      </div>
     )
   }
 
   return (
     <img
-      className="barra__logo"
+      className="logo-img"
       src={LOGO_CANDIDATOS[intento]}
       alt="Logo del Centro Agrícola Cantonal de Acosta"
-      width="40"
-      height="40"
+      width={tamano}
+      height={tamano}
       onError={() => setIntento((i) => i + 1)}
     />
   )
 }
 
-function Barra() {
+/* =================================================================
+   ICONOS (línea fina, minimalistas)
+   ================================================================= */
+
+function IconHoja() {
   return (
-    <header className="barra">
-      <div className="barra__marca">
-        <LogoCAC />
-        CAC ACOSTA
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25">
+      <path d="M2.5 22c5-1.2 10-4.2 14-9 1-4-1-9-5-11-3 3-5 7-5 11 0 2 1 5 3 7" />
+      <path d="M10 13c3-2 7-3 10-2" />
+    </svg>
+  )
+}
+
+function IconBrote() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25">
+      <path d="M12 22v-8" />
+      <path d="M12 14a4 4 0 0 0 4-4c0-3-3-5-4-8-1 3-4 5-4 8a4 4 0 0 0 4 4Z" />
+    </svg>
+  )
+}
+
+function IconCorazon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25">
+      <path d="M12 22c4-5 7-8 7-11a7 7 0 0 0-14 0c0 3 3 6 7 11Z" />
+    </svg>
+  )
+}
+
+const ICONOS_PILAR = [IconBrote, IconHoja, IconCorazon]
+
+/* =================================================================
+   HEADER
+   ================================================================= */
+
+function Header({ activo, irA }) {
+  const [scrolled, setScrolled] = useState(false)
+  const [menuAbierto, setMenuAbierto] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 18)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  const clickNav = (id) => {
+    setMenuAbierto(false)
+    irA(id)
+  }
+
+  return (
+    <header className={`header ${scrolled ? 'header--scrolled' : ''}`}>
+      <div className="header__fila envoltura">
+        <div className="header__marca">
+          <LogoCAC />
+          <div className="header__marca-texto">
+            <span className="header__marca-linea1">CENTRO AGRÍCOLA</span>
+            <span className="header__marca-linea2">CANTONAL DE ACOSTA</span>
+          </div>
+        </div>
+
+        <nav className="header__nav">
+          {NAV.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => clickNav(item.id)}
+              className={`header__link ${activo === item.id ? 'header__link--activo' : ''}`}
+            >
+              {item.label}
+            </button>
+          ))}
+        </nav>
+
+        <div className="header__acciones">
+          <button className="boton boton--oscuro header__cta" onClick={() => clickNav('contacto')}>
+            Escribir por WhatsApp
+          </button>
+          <button
+            className="header__hamburguesa"
+            aria-label="menú"
+            onClick={() => setMenuAbierto((v) => !v)}
+          >
+            <span className={menuAbierto ? 'linea linea--1-abierta' : 'linea'} />
+            <span className={menuAbierto ? 'linea linea--2-abierta' : 'linea'} />
+            <span className={menuAbierto ? 'linea linea--3-abierta' : 'linea'} />
+          </button>
+        </div>
       </div>
-      <nav className="barra__nav">
-        <a href="#ferias">Ferias</a>
-        <a href="#productos">Puestos</a>
-        <a href="#productores">Para productores</a>
-      </nav>
+
+      {menuAbierto && (
+        <div className="header__menu-movil">
+          {NAV.map((item) => (
+            <button key={item.id} onClick={() => clickNav(item.id)} className="header__menu-movil-link">
+              {item.label}
+            </button>
+          ))}
+          <button className="boton boton--oscuro" style={{ marginTop: 12 }} onClick={() => clickNav('contacto')}>
+            Escribir por WhatsApp
+          </button>
+        </div>
+      )}
     </header>
   )
 }
 
-function Hero() {
+/* =================================================================
+   HERO
+   ================================================================= */
+
+function Hero({ irA }) {
   const restante = useCuentaRegresiva(6, 5) // próximo sábado, 5 a.m.
+
   return (
-    <section className="hero">
-      <div className="hero__grano" aria-hidden="true"></div>
-      <div className="envoltura hero__contenido">
-        <div>
-          <span className="hero__eyebrow">Centro Agrícola Cantonal de Acosta</span>
-          <h1 className="hero__titulo">
-            LA FERIA<br />VIVE EN <em>ACOSTA</em>
-          </h1>
-          <p className="hero__texto">
-            De la montaña a su mesa. Café, hortalizas y productos de finca vendidos
-            directamente por quien los siembra, en San Ignacio y los cuatro distritos
-            del cantón.
-          </p>
-          <div className="hero__acciones">
-            <a className="boton boton--principal" href="#ferias">Ver días de feria</a>
-            <a className="boton boton--fantasma" href="#productores">Quiero vender ahí</a>
-          </div>
+    <section id="inicio" className="hero">
+      <div className="envoltura hero__grid">
+        <div className="hero__col-texto">
+          <Reveal>
+            <span className="etiqueta-pill">
+              <span className="punto-pulso" />
+              Feria semanal en San Ignacio y 4 distritos
+            </span>
+          </Reveal>
+
+          <Reveal delay={100}>
+            <h1 className="hero__titulo">
+              La feria vive
+              <br />
+              en <em>Acosta</em>.
+            </h1>
+          </Reveal>
+
+          <Reveal delay={180}>
+            <p className="hero__texto">
+              De la montaña a su mesa. Café, hortalizas y productos de finca vendidos directamente
+              por quien los siembra, en San Ignacio y los cuatro distritos del cantón.
+            </p>
+          </Reveal>
+
+          <Reveal delay={260}>
+            <div className="hero__acciones">
+              <button className="boton boton--oscuro" onClick={() => irA('ferias')}>
+                Ver días de feria
+              </button>
+              <button className="boton boton--fantasma" onClick={() => irA('puestos')}>
+                Ver puestos
+              </button>
+            </div>
+          </Reveal>
         </div>
-        <div className="hero__saco" aria-label={`Próxima feria en ${restante.dias} días`}>
-          <div className="hero__saco-texto">
-            <strong>{restante.dias}d {restante.horas}h</strong>
-            <span>Para la próxima feria</span>
+
+        <div className="hero__col-tarjeta">
+          <Reveal delay={150}>
+            <div className="tarjeta-cuenta">
+              <div className="tarjeta-cuenta__brillo" />
+              <span className="tarjeta-cuenta__etiqueta">Próxima feria en</span>
+              <div className="tarjeta-cuenta__numero">
+                {restante.dias}
+                <span>d</span> {restante.horas}
+                <span>h</span>
+              </div>
+              <div className="tarjeta-cuenta__linea" />
+              <p className="tarjeta-cuenta__nota">
+                San Ignacio abre cada sábado desde las 5:00 a.m.
+              </p>
+            </div>
+          </Reveal>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* =================================================================
+   NOSOTROS
+   ================================================================= */
+
+function Nosotros() {
+  return (
+    <section id="nosotros" className="seccion seccion--clara">
+      <div className="envoltura">
+        <div className="nosotros__grid">
+          <div className="nosotros__col-texto">
+            <Reveal>
+              <span className="ojo-etiqueta">— Nuestra esencia</span>
+              <h2 className="titulo-seccion">Del campo de Acosta a su mesa, sin intermediarios.</h2>
+              <p className="parrafo-suave">
+                El Centro Agrícola Cantonal organiza las ferias del agricultor en San Ignacio y en
+                los distritos de Guaitil, Palmichal, Cangrejal y Sabanillas: un espacio semanal
+                donde los productores del cantón venden directamente lo que cosechan.
+              </p>
+            </Reveal>
+          </div>
+
+          <div className="nosotros__col-tarjetas">
+            {PILARES.map((p, i) => {
+              const Icono = ICONOS_PILAR[i]
+              return (
+                <Reveal key={p.num} delay={i * 100}>
+                  <div className="tarjeta-pilar">
+                    <div className="tarjeta-pilar__cabecera">
+                      <span className="tarjeta-pilar__num">{p.num}</span>
+                      <span className="tarjeta-pilar__icono">
+                        <Icono />
+                      </span>
+                    </div>
+                    <h3 className="tarjeta-pilar__titulo">{p.titulo}</h3>
+                    <p className="tarjeta-pilar__texto">{p.texto}</p>
+                    <div className="tarjeta-pilar__linea" />
+                  </div>
+                </Reveal>
+              )
+            })}
           </div>
         </div>
       </div>
     </section>
   )
 }
+
+/* =================================================================
+   FERIAS
+   ================================================================= */
 
 function pad(n) {
   return String(n).padStart(2, '0')
 }
 
-function Calendario() {
+function Ferias() {
   const [activo, setActivo] = useState(FERIAS[0].id)
   const feriaActiva = useMemo(() => FERIAS.find((f) => f.id === activo), [activo])
   const restante = useCuentaRegresiva(feriaActiva.dia, 5)
 
   return (
-    <section className="seccion" id="ferias">
+    <section id="ferias" className="seccion">
       <div className="envoltura">
-        <div className="seccion__cabecera">
-          <div>
-            <p className="seccion__etiqueta">Calendario semanal</p>
-            <h2 className="seccion__titulo">Días de feria por distrito</h2>
+        <Reveal>
+          <div className="cabecera-seccion">
+            <div>
+              <span className="ojo-etiqueta">— Calendario semanal</span>
+              <h2 className="titulo-seccion">Días de feria por distrito</h2>
+            </div>
+            <p className="nota-seccion">Toque un distrito para ver horario, lugar y tiempo restante.</p>
           </div>
-          <p className="seccion__nota">
-            Toque un distrito para ver horario, lugar y el tiempo que falta.
-          </p>
-        </div>
+        </Reveal>
 
-        <div className="cajones" role="tablist" aria-label="Distritos con feria">
-          {FERIAS.map((f) => (
-            <button
-              key={f.id}
-              className="cajon"
-              role="tab"
-              aria-pressed={activo === f.id}
-              aria-selected={activo === f.id}
-              onClick={() => setActivo(f.id)}
-            >
-              <span className="cajon__dia">{f.diaTexto}</span>
-              <span className="cajon__distrito">{f.distrito}</span>
-            </button>
-          ))}
-        </div>
+        <Reveal delay={80}>
+          <div className="pestanas-distrito" role="tablist" aria-label="Distritos con feria">
+            {FERIAS.map((f) => (
+              <button
+                key={f.id}
+                role="tab"
+                aria-selected={activo === f.id}
+                className={`pestana-distrito ${activo === f.id ? 'pestana-distrito--activa' : ''}`}
+                onClick={() => setActivo(f.id)}
+              >
+                <span className="pestana-distrito__dia">{f.diaTexto}</span>
+                <span className="pestana-distrito__nombre">{f.distrito}</span>
+              </button>
+            ))}
+          </div>
+        </Reveal>
 
-        <div className="panel-dia">
-          <div className="panel-dia__reloj">
-            {restante.dias > 0 ? `${restante.dias}d ${pad(restante.horas)}h` : `${pad(restante.horas)}:${pad(restante.min)}:${pad(restante.seg)}`}
-            <small>Faltan</small>
+        <Reveal delay={140}>
+          <div className="panel-feria">
+            <div className="panel-feria__reloj">
+              <span className="panel-feria__reloj-numero">
+                {restante.dias > 0
+                  ? `${restante.dias}d ${pad(restante.horas)}h`
+                  : `${pad(restante.horas)}:${pad(restante.min)}:${pad(restante.seg)}`}
+              </span>
+              <span className="panel-feria__reloj-etiqueta">Faltan</span>
+            </div>
+            <div className="panel-feria__info">
+              <h3 className="panel-feria__titulo">
+                {feriaActiva.distrito}
+                {feriaActiva.principal && <span className="chip-principal">Feria principal</span>}
+              </h3>
+              <p className="panel-feria__meta">
+                <strong>{feriaActiva.diaTexto}</strong> · {feriaActiva.horario}
+              </p>
+              <p className="panel-feria__meta">{feriaActiva.lugar}</p>
+              <p className="panel-feria__descripcion">{feriaActiva.descripcion}</p>
+            </div>
           </div>
-          <div>
-            <h3 className="panel-dia__titulo">
-              {feriaActiva.distrito}{feriaActiva.principal ? ' · Feria principal' : ''}
-            </h3>
-            <p className="panel-dia__meta"><strong>{feriaActiva.diaTexto}</strong> · {feriaActiva.horario}</p>
-            <p className="panel-dia__meta">{feriaActiva.lugar}</p>
-            <p className="panel-dia__meta" style={{ opacity: 0.85 }}>{feriaActiva.descripcion}</p>
-          </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   )
 }
+
+/* =================================================================
+   PUESTOS
+   ================================================================= */
 
 function Puestos() {
   const [filtro, setFiltro] = useState('Todos')
@@ -252,37 +513,42 @@ function Puestos() {
   )
 
   return (
-    <section className="seccion" id="productos">
+    <section id="puestos" className="seccion seccion--clara">
       <div className="envoltura">
-        <div className="seccion__cabecera">
-          <div>
-            <p className="seccion__etiqueta">Quién vende qué</p>
-            <h2 className="seccion__titulo">Puestos de la feria</h2>
+        <Reveal>
+          <div className="cabecera-seccion">
+            <div>
+              <span className="ojo-etiqueta">— Quién vende qué</span>
+              <h2 className="titulo-seccion">Puestos de la feria</h2>
+            </div>
+            <p className="nota-seccion">Filtre por categoría para ubicar lo que busca.</p>
           </div>
-          <p className="seccion__nota">Filtre por categoría para ubicar lo que busca.</p>
-        </div>
+        </Reveal>
 
-        <div className="filtros" role="group" aria-label="Filtrar por categoría">
-          {CATEGORIAS.map((c) => (
-            <button
-              key={c}
-              className="filtro"
-              aria-pressed={filtro === c}
-              onClick={() => setFiltro(c)}
-            >
-              {c}
-            </button>
-          ))}
-        </div>
+        <Reveal delay={80}>
+          <div className="filtros" role="group" aria-label="Filtrar por categoría">
+            {CATEGORIAS.map((c) => (
+              <button
+                key={c}
+                className={`filtro ${filtro === c ? 'filtro--activo' : ''}`}
+                onClick={() => setFiltro(c)}
+              >
+                {c}
+              </button>
+            ))}
+          </div>
+        </Reveal>
 
-        <div className="puestos">
-          {visibles.map((p) => (
-            <article className="puesto" key={p.nombre}>
-              <span className="puesto__icono" aria-hidden="true">{p.icono}</span>
-              <h3 className="puesto__nombre">{p.nombre}</h3>
-              <p className="puesto__desc">{p.desc}</p>
-              <span className="puesto__categoria">{p.categoria}</span>
-            </article>
+        <div className="rejilla-puestos">
+          {visibles.map((p, i) => (
+            <Reveal key={p.nombre} delay={(i % 4) * 70}>
+              <article className="tarjeta-puesto">
+                <span className="tarjeta-puesto__icono">{p.icono}</span>
+                <h3 className="tarjeta-puesto__nombre">{p.nombre}</h3>
+                <p className="tarjeta-puesto__desc">{p.desc}</p>
+                <span className="tarjeta-puesto__categoria">{p.categoria}</span>
+              </article>
+            </Reveal>
           ))}
         </div>
       </div>
@@ -290,58 +556,83 @@ function Puestos() {
   )
 }
 
-function ParaProductores() {
+/* =================================================================
+   CONTACTO / CTA PRODUCTORES
+   ================================================================= */
+
+function Contacto() {
   return (
-    <section className="seccion" id="productores">
+    <section id="contacto" className="seccion-cta">
       <div className="envoltura">
-        <div className="cta-productor">
-          <div>
-            <h2 className="cta-productor__titulo">¿Usted produce en Acosta?</h2>
-            <p className="cta-productor__texto">
-              El Centro Agrícola Cantonal asigna espacios a productores del cantón.
-              Escríbanos y le explicamos los requisitos para tener su puesto en la
-              feria de San Ignacio o en las ferias distritales.
-            </p>
+        <Reveal>
+          <div className="cta-caja">
+            <div>
+              <h2 className="cta-caja__titulo">¿Usted produce en Acosta?</h2>
+              <p className="cta-caja__texto">
+                El Centro Agrícola Cantonal asigna espacios a productores del cantón. Escríbanos y
+                le explicamos los requisitos para tener su puesto en la feria de San Ignacio o en
+                las ferias distritales.
+              </p>
+            </div>
+            <a
+              className="boton boton--claro"
+              href="https://wa.me/50600000000"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Escribir por WhatsApp
+            </a>
           </div>
-          <a
-            className="boton boton--claro"
-            href="https://wa.me/50600000000"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Escribir por WhatsApp
-          </a>
-        </div>
+        </Reveal>
       </div>
     </section>
   )
 }
+
+/* =================================================================
+   FOOTER
+   ================================================================= */
 
 function Pie() {
   return (
     <footer className="pie">
-      <div className="envoltura pie__filas">
-        <span>© {new Date().getFullYear()} Centro Agrícola Cantonal de Acosta</span>
-        <div className="pie__distritos">
-          <span>San Ignacio</span>
-          <span>Guaitil</span>
-          <span>Palmichal</span>
-          <span>Cangrejal</span>
-          <span>Sabanillas</span>
+      <div className="envoltura pie__fila">
+        <div className="pie__marca">
+          <LogoCAC tamano={28} />
+          <span>Centro Agrícola Cantonal de Acosta</span>
         </div>
+        <div className="pie__distritos">
+          {FERIAS.map((f) => (
+            <span key={f.id}>{f.distrito}</span>
+          ))}
+        </div>
+        <span className="pie__copy">© {new Date().getFullYear()} CAC Acosta</span>
       </div>
     </footer>
   )
 }
 
+/* =================================================================
+   APP
+   ================================================================= */
+
 export default function App() {
+  const [activo, setActivo] = useState('inicio')
+
+  const irA = (id) => {
+    setActivo(id)
+    const el = document.getElementById(id)
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
   return (
     <div className="pagina">
-      <Barra />
-      <Hero />
-      <Calendario />
+      <Header activo={activo} irA={irA} />
+      <Hero irA={irA} />
+      <Nosotros />
+      <Ferias />
       <Puestos />
-      <ParaProductores />
+      <Contacto />
       <Pie />
     </div>
   )
