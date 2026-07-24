@@ -1,16 +1,23 @@
 /* =================================================================
-   CAC ACOSTA — Diseño editorial / minimalista
+   CAC ACOSTA — Diseño editorial / minimalista / premium
    Paleta: verde profundo, dorado tierra, crema
    ================================================================= */
 
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,340;0,9..144,480;1,9..144,420&family=Inter:wght@300;400;500;600&display=swap');
+
 :root {
   --verde: #1a3c2a;
+  --verde-oscuro: #0f2417;
   --verde-suave: rgba(26, 60, 42, 0.7);
   --dorado: #c4a77d;
+  --dorado-fuerte: #ad8b5c;
   --crema: #f5f1e8;
   --fondo: #fdfcf9;
   --borde: rgba(26, 60, 42, 0.1);
   --sombra: 0 8px 30px rgba(26, 60, 42, 0.06);
+  --sombra-alta: 0 24px 60px rgba(15, 36, 23, 0.16);
+  --serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 * {
@@ -25,14 +32,27 @@ body {
   margin: 0;
   background: var(--fondo);
   color: var(--verde);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, sans-serif;
+  font-family: var(--sans);
   -webkit-font-smoothing: antialiased;
+  position: relative;
+}
+
+/* textura fina de grano — le quita lo "plano" al fondo */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.02 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 h1,
 h2,
 h3 {
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: var(--serif);
   letter-spacing: -0.01em;
   margin: 0;
   font-weight: 500;
@@ -98,6 +118,8 @@ button {
 }
 
 .boton {
+  position: relative;
+  overflow: hidden;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -109,16 +131,45 @@ button {
   text-transform: uppercase;
   text-decoration: none;
   border: 1px solid transparent;
-  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease, border-color 0.3s ease;
   white-space: nowrap;
+  will-change: transform;
+}
+
+.boton:active {
+  transform: scale(0.97);
+}
+
+.boton span.boton__capa {
+  position: absolute;
+  inset: 0;
+  transform: translateX(-101%);
+  transition: transform 0.45s cubic-bezier(0.65, 0, 0.35, 1);
+  z-index: 0;
+}
+
+.boton:hover span.boton__capa {
+  transform: translateX(0);
+}
+
+.boton span.boton__texto {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .boton--oscuro {
   background: var(--verde);
   color: #fff;
 }
+.boton--oscuro span.boton__capa {
+  background: var(--verde-oscuro);
+}
 .boton--oscuro:hover {
-  background: #0f2417;
+  box-shadow: var(--sombra-alta);
+  transform: translateY(-2px);
 }
 
 .boton--fantasma {
@@ -126,16 +177,24 @@ button {
   border-color: var(--borde);
   color: var(--verde);
 }
+.boton--fantasma span.boton__capa {
+  background: var(--crema);
+}
 .boton--fantasma:hover {
   border-color: rgba(26, 60, 42, 0.3);
+  transform: translateY(-2px);
 }
 
 .boton--claro {
   background: var(--fondo);
   color: var(--verde);
 }
-.boton--claro:hover {
+.boton--claro span.boton__capa {
   background: #fff;
+}
+.boton--claro:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
 }
 
 .etiqueta-pill {
@@ -351,13 +410,48 @@ button {
   color: var(--verde);
 }
 
+.header__menu-movil-llamar {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 10px;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--verde);
+  opacity: 0.75;
+  text-decoration: none;
+}
+
 /* ---------- hero ---------- */
 
 .hero {
-  padding: 148px 0 80px;
+  position: relative;
+  padding: 148px 0 0;
+  overflow: hidden;
+}
+
+.hero__palabra-fondo {
+  position: absolute;
+  top: 96px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--serif);
+  font-weight: 340;
+  font-size: clamp(90px, 18vw, 260px);
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(26, 60, 42, 0.07);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
 }
 
 .hero__grid {
+  position: relative;
+  z-index: 1;
+  padding-bottom: 72px;
   display: grid;
   gap: 48px;
   align-items: center;
@@ -401,7 +495,7 @@ button {
   position: relative;
   overflow: hidden;
   border-radius: 22px;
-  border: 1px solid var(--borde);
+  border: 1px solid rgba(196, 167, 125, 0.35);
   background: linear-gradient(155deg, var(--verde) 0%, #234d36 55%, #0f2419 100%);
   color: #f5f1e8;
   padding: 40px 32px;
@@ -409,12 +503,40 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  box-shadow: var(--sombra-alta);
 }
 
 .tarjeta-cuenta__brillo {
   position: absolute;
   inset: 0;
   background: radial-gradient(circle at 80% 0%, rgba(196, 167, 125, 0.25), transparent 55%);
+}
+
+.tarjeta-cuenta__brillo::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -20%;
+  width: 60%;
+  height: 200%;
+  background: linear-gradient(
+    100deg,
+    transparent 30%,
+    rgba(245, 241, 232, 0.14) 48%,
+    rgba(245, 241, 232, 0.04) 52%,
+    transparent 70%
+  );
+  animation: barrido-brillo 6.5s ease-in-out infinite;
+}
+
+@keyframes barrido-brillo {
+  0% {
+    transform: translateX(-40%);
+  }
+  55%,
+  100% {
+    transform: translateX(220%);
+  }
 }
 
 .tarjeta-cuenta__etiqueta {
@@ -427,9 +549,11 @@ button {
 
 .tarjeta-cuenta__numero {
   position: relative;
-  font-family: Georgia, serif;
-  font-size: 52px;
+  font-family: var(--serif);
+  font-weight: 480;
+  font-size: 56px;
   margin-top: 10px;
+  font-variant-numeric: tabular-nums;
 }
 
 .tarjeta-cuenta__numero span {
@@ -452,6 +576,59 @@ button {
   line-height: 1.6;
   opacity: 0.7;
   max-width: 220px;
+}
+
+/* ---------- ticker ---------- */
+
+.ticker {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid var(--borde);
+  border-bottom: 1px solid var(--borde);
+  overflow: hidden;
+  background: var(--crema);
+}
+
+.ticker__pista {
+  display: flex;
+  width: max-content;
+  animation: desliza-ticker 32s linear infinite;
+}
+
+.ticker__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  padding: 14px 0;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--verde-suave);
+  white-space: nowrap;
+  margin-right: 20px;
+}
+
+.ticker__punto {
+  width: 4px;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--dorado);
+  margin-left: 20px;
+}
+
+@keyframes desliza-ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker__pista {
+    animation: none;
+  }
 }
 
 /* ---------- secciones genéricas ---------- */
@@ -494,6 +671,8 @@ button {
 }
 
 .tarjeta-pilar {
+  position: relative;
+  overflow: hidden;
   background: var(--fondo);
   border: 1px solid var(--borde);
   border-radius: 18px;
@@ -502,9 +681,32 @@ button {
   display: flex;
   flex-direction: column;
   box-shadow: var(--sombra);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.tarjeta-pilar:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--sombra-alta);
+  border-color: rgba(196, 167, 125, 0.5);
+}
+
+.tarjeta-pilar::after {
+  content: attr(data-num);
+  position: absolute;
+  right: 6px;
+  bottom: -30px;
+  font-family: var(--serif);
+  font-weight: 480;
+  font-size: 120px;
+  color: var(--verde);
+  opacity: 0.04;
+  line-height: 1;
+  pointer-events: none;
 }
 
 .tarjeta-pilar__cabecera {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -765,6 +967,29 @@ button {
 .cta-caja__titulo {
   font-size: clamp(24px, 3vw, 32px);
   color: #fff;
+}
+
+.cta-caja__acciones {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.cta-caja__llamar {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: #fff;
+  opacity: 0.75;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.cta-caja__llamar:hover {
+  opacity: 1;
 }
 
 .cta-caja__texto {
