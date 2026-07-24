@@ -186,6 +186,8 @@ function Reveal({ children, delay = 0, className = '' }) {
    ================================================================= */
 
 const LOGO_CANDIDATOS = [
+  '/logo.png',
+  '/logo.PNG',
   '/logo-cac.jpeg',
   '/logo-cac.jpg',
   '/logo-cac.JPG',
@@ -193,6 +195,7 @@ const LOGO_CANDIDATOS = [
   '/logo-cac.png',
   '/logo-cac.PNG',
 ]
+
 
 /** Botón con barrido de color al hover (detalle premium) */
 function Boton({ children, className = '', as = 'button', ...props }) {
