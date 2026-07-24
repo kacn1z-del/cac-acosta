@@ -16,6 +16,7 @@ const NAV = [
   { id: 'nosotros', label: 'Nosotros' },
   { id: 'ferias', label: 'Ferias' },
   { id: 'puestos', label: 'Puestos' },
+  { id: 'servicios', label: 'Servicios' },
   { id: 'contacto', label: 'Contacto' },
 ]
 
@@ -705,6 +706,69 @@ const BENEFICIOS_AFILIACION = [
   'Pago de carné de afiliación',
 ]
 
+/* =================================================================
+   SERVICIOS — Carné de feriante + Banco de yemas
+   ================================================================= */
+
+const SERVICIOS = [
+  {
+    num: '01',
+    titulo: 'Carné de feriante',
+    texto:
+      'Afíliese al CAC Acosta y participe con su puesto en cualquier feria del agricultor del país. Incluye el pago del carné de afiliación.',
+    cta: 'Solicitar carné',
+  },
+  {
+    num: '02',
+    titulo: 'Banco de yemas para injerto',
+    texto:
+      'Yemas de variedades seleccionadas disponibles para injertar árboles frutales y de café, y mejorar la productividad de su finca.',
+    cta: 'Consultar disponibilidad',
+  },
+]
+
+function Servicios() {
+  return (
+    <section id="servicios" className="seccion seccion--clara">
+      <div className="envoltura">
+        <Reveal>
+          <div className="cabecera-seccion">
+            <div>
+              <span className="ojo-etiqueta">— Para productores</span>
+              <h2 className="titulo-seccion">Servicios del CAC Acosta</h2>
+            </div>
+            <p className="nota-seccion">Escríbanos por WhatsApp para iniciar cualquiera de estos trámites.</p>
+          </div>
+        </Reveal>
+
+        <div className="rejilla-servicios">
+          {SERVICIOS.map((s, i) => (
+            <Reveal key={s.num} delay={i * 100}>
+              <div className="tarjeta-pilar tarjeta-pilar--servicio" data-num={s.num}>
+                <div className="tarjeta-pilar__cabecera">
+                  <span className="tarjeta-pilar__num">{s.num}</span>
+                </div>
+                <h3 className="tarjeta-pilar__titulo">{s.titulo}</h3>
+                <p className="tarjeta-pilar__texto">{s.texto}</p>
+                <a
+                  className="tarjeta-servicio__enlace"
+                  href={`https://wa.me/${CONTACTO.telefonoWa}?text=${encodeURIComponent(
+                    'Hola, quisiera información sobre ' + s.titulo
+                  )}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <IconWhatsApp tamano={14} /> {s.cta}
+                </a>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
 function Contacto() {
   return (
     <section id="contacto" className="seccion-cta">
@@ -789,9 +853,9 @@ export default function App() {
       <Nosotros />
       <Ferias />
       <Puestos />
+      <Servicios />
       <Contacto />
       <Pie />
     </div>
   )
 }
-
