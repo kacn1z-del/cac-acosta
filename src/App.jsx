@@ -560,6 +560,11 @@ function Puestos() {
    CONTACTO / CTA PRODUCTORES
    ================================================================= */
 
+const BENEFICIOS_AFILIACION = [
+  'Afíliese al CAC Acosta y participe en cualquier feria del país',
+  'Pago de carné de afiliación',
+]
+
 function Contacto() {
   return (
     <section id="contacto" className="seccion-cta">
@@ -573,6 +578,11 @@ function Contacto() {
                 le explicamos los requisitos para tener su puesto en la feria de San Ignacio o en
                 las ferias distritales.
               </p>
+              <ul className="cta-caja__lista">
+                {BENEFICIOS_AFILIACION.map((b) => (
+                  <li key={b}>{b}</li>
+                ))}
+              </ul>
             </div>
             <a
               className="boton boton--claro"
@@ -637,4 +647,3 @@ export default function App() {
     </div>
   )
 }
-
