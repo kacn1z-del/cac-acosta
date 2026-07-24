@@ -5,6 +5,12 @@ import { useEffect, useMemo, useRef, useState } from 'react'
    dia: 0=domingo … 6=sábado (para el cálculo de la cuenta regresiva)
    ================================================================= */
 
+const CONTACTO = {
+  telefonoDisplay: '+506 8768 0039',
+  telefonoWa: '50687680039',
+  telefonoTel: '+50687680039',
+}
+
 const NAV = [
   { id: 'inicio', label: 'Inicio' },
   { id: 'nosotros', label: 'Nosotros' },
@@ -187,6 +193,17 @@ const LOGO_CANDIDATOS = [
   '/logo-cac.PNG',
 ]
 
+/** Botón con barrido de color al hover (detalle premium) */
+function Boton({ children, className = '', as = 'button', ...props }) {
+  const Etiqueta = as
+  return (
+    <Etiqueta className={`boton ${className}`} {...props}>
+      <span className="boton__capa" />
+      <span className="boton__texto">{children}</span>
+    </Etiqueta>
+  )
+}
+
 function LogoCAC({ tamano = 36 }) {
   const [intento, setIntento] = useState(0)
 
@@ -240,6 +257,24 @@ function IconCorazon() {
   )
 }
 
+/** Logo oficial de WhatsApp (glifo simplificado) */
+function IconWhatsApp({ tamano = 18 }) {
+  return (
+    <svg width={tamano} height={tamano} viewBox="0 0 32 32" fill="currentColor" aria-hidden="true">
+      <path d="M16.02 3C9.4 3 4 8.37 4 14.98c0 2.28.63 4.42 1.73 6.26L3 29l7.98-2.66a12.9 12.9 0 0 0 5.04 1.02h.01c6.62 0 12-5.37 12-11.98C28.03 8.37 22.65 3 16.02 3Zm0 21.87h-.01a9.9 9.9 0 0 1-5.05-1.39l-.36-.21-4.73 1.58 1.58-4.6-.24-.37a9.9 9.9 0 0 1-1.53-5.3c0-5.47 4.46-9.92 9.95-9.92 2.66 0 5.15 1.03 7.03 2.9a9.86 9.86 0 0 1 2.91 7.02c0 5.48-4.46 9.29-9.55 9.29Zm5.44-7.42c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.87 1.22 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2.01-1.42.25-.7.25-1.29.17-1.42-.07-.12-.27-.2-.57-.35Z" />
+    </svg>
+  )
+}
+
+/** Ícono de llamada */
+function IconTelefono({ tamano = 16 }) {
+  return (
+    <svg width={tamano} height={tamano} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4">
+      <path d="M4.5 4.5c1-1 2.2-1 3 0l1.6 2.2c.5.7.4 1.6-.2 2.2l-1 1c-.3.3-.3.7-.1 1a13.4 13.4 0 0 0 5.3 5.3c.3.2.7.2 1-.1l1-1c.6-.6 1.5-.7 2.2-.2l2.2 1.6c1 .8 1 2 0 3l-.9.9c-.9.9-2.3 1.3-3.5 1-4.3-1.2-8.4-5.3-9.9-9.9-.4-1.3 0-2.6 1-3.6l.9-.9Z" />
+    </svg>
+  )
+}
+
 const ICONOS_PILAR = [IconBrote, IconHoja, IconCorazon]
 
 /* =================================================================
@@ -285,9 +320,15 @@ function Header({ activo, irA }) {
         </nav>
 
         <div className="header__acciones">
-          <button className="boton boton--oscuro header__cta" onClick={() => clickNav('contacto')}>
-            Escribir por WhatsApp
-          </button>
+          <Boton
+            as="a"
+            className="boton--oscuro header__cta"
+            href={`https://wa.me/${CONTACTO.telefonoWa}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <IconWhatsApp /> WhatsApp
+          </Boton>
           <button
             className="header__hamburguesa"
             aria-label="menú"
@@ -307,9 +348,19 @@ function Header({ activo, irA }) {
               {item.label}
             </button>
           ))}
-          <button className="boton boton--oscuro" style={{ marginTop: 12 }} onClick={() => clickNav('contacto')}>
-            Escribir por WhatsApp
-          </button>
+          <Boton
+            as="a"
+            className="boton--oscuro"
+            style={{ marginTop: 12 }}
+            href={`https://wa.me/${CONTACTO.telefonoWa}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <IconWhatsApp /> WhatsApp
+          </Boton>
+          <a className="header__menu-movil-llamar" href={`tel:${CONTACTO.telefonoTel}`}>
+            <IconTelefono /> {CONTACTO.telefonoDisplay}
+          </a>
         </div>
       )}
     </header>
@@ -320,11 +371,32 @@ function Header({ activo, irA }) {
    HERO
    ================================================================= */
 
+const TICKER = [...FERIAS.map((f) => f.distrito), 'Café', 'Hortalizas', 'Lácteos', 'Frutas', 'Artesanía']
+
+function Ticker() {
+  const fila = [...TICKER, ...TICKER]
+  return (
+    <div className="ticker">
+      <div className="ticker__pista">
+        {fila.map((item, i) => (
+          <span className="ticker__item" key={`${item}-${i}`}>
+            {item}
+            <span className="ticker__punto" />
+          </span>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 function Hero({ irA }) {
   const restante = useCuentaRegresiva(6, 5) // próximo sábado, 5 a.m.
 
   return (
     <section id="inicio" className="hero">
+      <span className="hero__palabra-fondo" aria-hidden="true">
+        ACOSTA
+      </span>
       <div className="envoltura hero__grid">
         <div className="hero__col-texto">
           <Reveal>
@@ -351,12 +423,12 @@ function Hero({ irA }) {
 
           <Reveal delay={260}>
             <div className="hero__acciones">
-              <button className="boton boton--oscuro" onClick={() => irA('ferias')}>
+              <Boton className="boton--oscuro" onClick={() => irA('ferias')}>
                 Ver días de feria
-              </button>
-              <button className="boton boton--fantasma" onClick={() => irA('puestos')}>
+              </Boton>
+              <Boton className="boton--fantasma" onClick={() => irA('puestos')}>
                 Ver puestos
-              </button>
+              </Boton>
             </div>
           </Reveal>
         </div>
@@ -379,6 +451,7 @@ function Hero({ irA }) {
           </Reveal>
         </div>
       </div>
+      <Ticker />
     </section>
   )
 }
@@ -584,14 +657,21 @@ function Contacto() {
                 ))}
               </ul>
             </div>
-            <a
-              className="boton boton--claro"
-              href="https://wa.me/50600000000"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Escribir por WhatsApp
-            </a>
+            <div className="cta-caja__acciones">
+              <Boton
+                as="a"
+                className="boton--claro"
+                href={`https://wa.me/${CONTACTO.telefonoWa}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <IconWhatsApp /> WhatsApp
+              </Boton>
+              <a className="cta-caja__llamar" href={`tel:${CONTACTO.telefonoTel}`}>
+                <IconTelefono />
+                {CONTACTO.telefonoDisplay}
+              </a>
+            </div>
           </div>
         </Reveal>
       </div>
