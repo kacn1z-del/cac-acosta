@@ -1138,3 +1138,43 @@ button {
 .pie__copy {
   opacity: 0.6;
 }
+
+/* ---------- servicios ---------- */
+
+.rejilla-servicios {
+  display: grid;
+  gap: 24px;
+  margin-top: 8px;
+}
+
+@media (min-width: 700px) {
+  .rejilla-servicios {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.tarjeta-pilar--servicio {
+  min-height: 250px;
+}
+
+.tarjeta-servicio__enlace {
+  position: relative;
+  z-index: 1;
+  margin-top: auto;
+  padding-top: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--verde);
+  text-decoration: none;
+  border-top: 1px solid var(--borde);
+  transition: color 0.2s ease, gap 0.2s ease;
+}
+
+.tarjeta-servicio__enlace:hover {
+  color: var(--dorado-fuerte);
+  gap: 12px;
+}
