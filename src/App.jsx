@@ -72,14 +72,14 @@ const FERIAS = [
 const CATEGORIAS = ['Todos', 'Café', 'Verduras', 'Frutas', 'Lácteos', 'Panadería', 'Artesanía']
 
 const PUESTOS = [
-  { nombre: 'Beneficio El Cerro', categoria: 'Café', icono: '☕', desc: 'Café de altura, tueste medio y oscuro, molido al momento.' },
-  { nombre: 'Finca Los Chinchilla', categoria: 'Verduras', icono: '🥬', desc: 'Culantro, chile dulce, tomate y hortalizas de la semana.' },
-  { nombre: 'Huerta Sabanillas', categoria: 'Frutas', icono: '🍍', desc: 'Piña, banano y cítricos cosechados el mismo día.' },
-  { nombre: 'Lácteos Palmichal', categoria: 'Lácteos', icono: '🧀', desc: 'Queso fresco, natilla y cuajada de producción familiar.' },
-  { nombre: 'Panadería Doña Flor', categoria: 'Panadería', icono: '🍞', desc: 'Pan casero, empanadas y rosquillas de horno de leña.' },
-  { nombre: 'Taller Guaitil Artesanal', categoria: 'Artesanía', icono: '🧺', desc: 'Canastos de mimbre y piezas talladas por manos locales.' },
-  { nombre: 'Cafetal Cangrejal', categoria: 'Café', icono: '☕', desc: 'Café orgánico certificado, en grano o molido.' },
-  { nombre: 'Raíces de Acosta', categoria: 'Verduras', icono: '🥕', desc: 'Yuca, camote, ñame y tubérculos de la zona.' },
+  { nombre: 'Beneficio El Cerro', categoria: 'Café', desc: 'Café de altura, tueste medio y oscuro, molido al momento.' },
+  { nombre: 'Finca Los Chinchilla', categoria: 'Verduras', desc: 'Culantro, chile dulce, tomate y hortalizas de la semana.' },
+  { nombre: 'Huerta Sabanillas', categoria: 'Frutas', desc: 'Piña, banano y cítricos cosechados el mismo día.' },
+  { nombre: 'Lácteos Palmichal', categoria: 'Lácteos', desc: 'Queso fresco, natilla y cuajada de producción familiar.' },
+  { nombre: 'Panadería Doña Flor', categoria: 'Panadería', desc: 'Pan casero, empanadas y rosquillas de horno de leña.' },
+  { nombre: 'Taller Guaitil Artesanal', categoria: 'Artesanía', desc: 'Canastos de mimbre y piezas talladas por manos locales.' },
+  { nombre: 'Cafetal Cangrejal', categoria: 'Café', desc: 'Café orgánico certificado, en grano o molido.' },
+  { nombre: 'Raíces de Acosta', categoria: 'Verduras', desc: 'Yuca, camote, ñame y tubérculos de la zona.' },
 ]
 
 const PILARES = [
@@ -204,26 +204,26 @@ function Boton({ children, className = '', as = 'button', ...props }) {
   )
 }
 
-function LogoCAC({ tamano = 36 }) {
+function LogoCAC({ tamano = 40 }) {
   const [intento, setIntento] = useState(0)
 
   if (intento >= LOGO_CANDIDATOS.length) {
     return (
-      <div className="logo-respaldo" style={{ width: tamano, height: tamano }}>
-        CA
+      <div className="logo-marco" style={{ width: tamano, height: tamano }}>
+        <div className="logo-respaldo">CA</div>
       </div>
     )
   }
 
   return (
-    <img
-      className="logo-img"
-      src={LOGO_CANDIDATOS[intento]}
-      alt="Logo del Centro Agrícola Cantonal de Acosta"
-      width={tamano}
-      height={tamano}
-      onError={() => setIntento((i) => i + 1)}
-    />
+    <div className="logo-marco" style={{ width: tamano, height: tamano }}>
+      <img
+        className="logo-img"
+        src={LOGO_CANDIDATOS[intento]}
+        alt="Logo del Centro Agrícola Cantonal de Acosta"
+        onError={() => setIntento((i) => i + 1)}
+      />
+    </div>
   )
 }
 
@@ -273,6 +273,64 @@ function IconTelefono({ tamano = 16 }) {
       <path d="M4.5 4.5c1-1 2.2-1 3 0l1.6 2.2c.5.7.4 1.6-.2 2.2l-1 1c-.3.3-.3.7-.1 1a13.4 13.4 0 0 0 5.3 5.3c.3.2.7.2 1-.1l1-1c.6-.6 1.5-.7 2.2-.2l2.2 1.6c1 .8 1 2 0 3l-.9.9c-.9.9-2.3 1.3-3.5 1-4.3-1.2-8.4-5.3-9.9-9.9-.4-1.3 0-2.6 1-3.6l.9-.9Z" />
     </svg>
   )
+}
+
+const ICONOS_CATEGORIA = {
+  Café: function IconCafe() {
+    return (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25">
+        <path d="M5 9h11v6a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4V9Z" />
+        <path d="M16 10h1.5a2.5 2.5 0 0 1 0 5H16" />
+        <path d="M8 5.5c0-1 .8-1.2.8-2.2M11.5 5.5c0-1 .8-1.2.8-2.2" />
+      </svg>
+    )
+  },
+  Verduras: function IconVerdura() {
+    return (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25">
+        <path d="M12 21c-4.4 0-7-3-7-7 0-3.5 2.6-7 7-9 4.4 2 7 5.5 7 9 0 4-2.6 7-7 7Z" />
+        <path d="M12 21V9" />
+      </svg>
+    )
+  },
+  Frutas: function IconFruta() {
+    return (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25">
+        <circle cx="12" cy="14" r="7" />
+        <path d="M12 7c0-2 1-3.5 3-4" />
+      </svg>
+    )
+  },
+  Lácteos: function IconLacteo() {
+    return (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25">
+        <path d="M9 3h6l1 4-1.5 2v10a1.5 1.5 0 0 1-1.5 1.5h-2A1.5 1.5 0 0 1 9.5 19V9L8 5l1-2Z" />
+        <path d="M9.5 12h5" />
+      </svg>
+    )
+  },
+  Panadería: function IconPan() {
+    return (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25">
+        <path d="M4 13c0-4 3.5-8 8-8s8 4 8 8-3 6-8 6-8-2-8-6Z" />
+        <path d="M9 12c.5-1 1.5-1 2 0M13 12c.5-1 1.5-1 2 0" />
+      </svg>
+    )
+  },
+  Artesanía: function IconArtesania() {
+    return (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25">
+        <path d="M4 10h16l-1.5 9a1.5 1.5 0 0 1-1.5 1.3H7a1.5 1.5 0 0 1-1.5-1.3L4 10Z" />
+        <path d="M8 10a4 4 0 0 1 8 0" />
+      </svg>
+    )
+  },
+}
+
+function IconCategoria({ categoria }) {
+  const Icono = ICONOS_CATEGORIA[categoria]
+  if (!Icono) return null
+  return <Icono />
 }
 
 const ICONOS_PILAR = [IconBrote, IconHoja, IconCorazon]
@@ -327,7 +385,7 @@ function Header({ activo, irA }) {
             target="_blank"
             rel="noreferrer"
           >
-            <IconWhatsApp /> WhatsApp
+            <IconWhatsApp /> {CONTACTO.telefonoDisplay}
           </Boton>
           <button
             className="header__hamburguesa"
@@ -356,7 +414,7 @@ function Header({ activo, irA }) {
             target="_blank"
             rel="noreferrer"
           >
-            <IconWhatsApp /> WhatsApp
+            <IconWhatsApp /> {CONTACTO.telefonoDisplay}
           </Boton>
           <a className="header__menu-movil-llamar" href={`tel:${CONTACTO.telefonoTel}`}>
             <IconTelefono /> {CONTACTO.telefonoDisplay}
@@ -400,6 +458,13 @@ function Hero({ irA }) {
       <div className="envoltura hero__grid">
         <div className="hero__col-texto">
           <Reveal>
+            <div className="hero__logo-fila">
+              <LogoCAC tamano={58} />
+              <span className="hero__logo-linea" />
+            </div>
+          </Reveal>
+
+          <Reveal delay={60}>
             <span className="etiqueta-pill">
               <span className="punto-pulso" />
               Feria semanal en San Ignacio y 4 distritos
@@ -482,7 +547,7 @@ function Nosotros() {
               const Icono = ICONOS_PILAR[i]
               return (
                 <Reveal key={p.num} delay={i * 100}>
-                  <div className="tarjeta-pilar">
+                  <div className="tarjeta-pilar" data-num={p.num}>
                     <div className="tarjeta-pilar__cabecera">
                       <span className="tarjeta-pilar__num">{p.num}</span>
                       <span className="tarjeta-pilar__icono">
@@ -615,8 +680,10 @@ function Puestos() {
         <div className="rejilla-puestos">
           {visibles.map((p, i) => (
             <Reveal key={p.nombre} delay={(i % 4) * 70}>
-              <article className="tarjeta-puesto">
-                <span className="tarjeta-puesto__icono">{p.icono}</span>
+              <article className="tarjeta-puesto" data-num={String(i + 1).padStart(2, '0')}>
+                <span className="tarjeta-puesto__icono">
+                  <IconCategoria categoria={p.categoria} />
+                </span>
                 <h3 className="tarjeta-puesto__nombre">{p.nombre}</h3>
                 <p className="tarjeta-puesto__desc">{p.desc}</p>
                 <span className="tarjeta-puesto__categoria">{p.categoria}</span>
@@ -665,7 +732,7 @@ function Contacto() {
                 target="_blank"
                 rel="noreferrer"
               >
-                <IconWhatsApp /> WhatsApp
+                <IconWhatsApp /> {CONTACTO.telefonoDisplay}
               </Boton>
               <a className="cta-caja__llamar" href={`tel:${CONTACTO.telefonoTel}`}>
                 <IconTelefono />
