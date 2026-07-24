@@ -243,20 +243,43 @@ button {
 
 /* ---------- logo ---------- */
 
+.logo-marco {
+  position: relative;
+  flex-shrink: 0;
+  border-radius: 999px;
+  padding: 3px;
+  background: linear-gradient(155deg, var(--dorado) 0%, rgba(196, 167, 125, 0.35) 60%, transparent 100%);
+  box-shadow: 0 6px 18px rgba(26, 60, 42, 0.14);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+}
+
+.logo-marco:hover {
+  transform: scale(1.04);
+  box-shadow: 0 10px 26px rgba(26, 60, 42, 0.2);
+}
+
 .logo-img {
-  border-radius: 6px;
-  object-fit: cover;
   display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  object-fit: cover;
+  background: #fff;
+  border: 2px solid #fff;
 }
 
 .logo-respaldo {
+  width: 100%;
+  height: 100%;
   display: grid;
   place-items: center;
   background: var(--verde);
   color: var(--crema);
-  border-radius: 6px;
-  font-size: 11px;
-  letter-spacing: 0.14em;
+  border-radius: 999px;
+  border: 2px solid #fff;
+  font-family: var(--serif);
+  font-size: 12px;
+  letter-spacing: 0.1em;
   font-weight: 600;
 }
 
@@ -461,6 +484,19 @@ button {
   .hero__grid {
     grid-template-columns: 1.2fr 0.8fr;
   }
+}
+
+.hero__logo-fila {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.hero__logo-linea {
+  width: 34px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--dorado), transparent);
 }
 
 .hero__titulo {
@@ -912,6 +948,8 @@ button {
 }
 
 .tarjeta-puesto {
+  position: relative;
+  overflow: hidden;
   background: #fff;
   border: 1px solid var(--borde);
   border-radius: 18px;
@@ -921,10 +959,47 @@ button {
   gap: 10px;
   box-shadow: var(--sombra);
   height: 100%;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.tarjeta-puesto::after {
+  content: attr(data-num);
+  position: absolute;
+  top: -10px;
+  right: 14px;
+  font-family: var(--serif);
+  font-weight: 480;
+  font-size: 64px;
+  color: var(--verde);
+  opacity: 0.05;
+  pointer-events: none;
+}
+
+.tarjeta-puesto > * {
+  position: relative;
+  z-index: 1;
+}
+
+.tarjeta-puesto:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--sombra-alta);
+  border-color: rgba(196, 167, 125, 0.5);
 }
 
 .tarjeta-puesto__icono {
-  font-size: 26px;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--crema);
+  color: var(--dorado-fuerte);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.tarjeta-puesto:hover .tarjeta-puesto__icono {
+  background: var(--verde);
+  color: var(--dorado);
 }
 
 .tarjeta-puesto__nombre {
@@ -1063,4 +1138,3 @@ button {
 .pie__copy {
   opacity: 0.6;
 }
-
