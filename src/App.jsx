@@ -196,7 +196,6 @@ const LOGO_CANDIDATOS = [
   '/logo-cac.PNG',
 ]
 
-
 /** Botón con barrido de color al hover (detalle premium) */
 function Boton({ children, className = '', as = 'button', ...props }) {
   const Etiqueta = as
