@@ -186,6 +186,7 @@ function Reveal({ children, delay = 0, className = '' }) {
    ================================================================= */
 
 const LOGO_CANDIDATOS = [
+  '/Logo.png',
   '/logo.png',
   '/logo.PNG',
   '/logo-cac.jpeg',
