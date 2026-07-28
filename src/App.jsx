@@ -14,7 +14,6 @@ const CONTACTO = {
 const NAV = [
   { id: 'inicio', label: 'Inicio' },
   { id: 'nosotros', label: 'Nosotros' },
-  { id: 'ferias', label: 'Ferias' },
   { id: 'puestos', label: 'Puestos' },
   { id: 'servicios', label: 'Servicios' },
   { id: 'contacto', label: 'Contacto' },
@@ -88,19 +87,13 @@ const PILARES = [
     num: '01',
     titulo: 'Misión',
     texto:
-      'Conectar al productor de Acosta directamente con quien consume, sin intermediarios, garantizando precio justo y producto fresco.',
+      'Ser una organización líder en el cantón de Acosta, cumpliendo las normativas para lo cual fue creado, primordialmente el fortalecimiento social y económico de los productores y productoras afiliados y no afiliados.',
   },
   {
     num: '02',
     titulo: 'Visión',
     texto:
-      'Ser el punto de encuentro semanal de referencia entre el campo y las familias del cantón, en San Ignacio y sus cuatro distritos.',
-  },
-  {
-    num: '03',
-    titulo: 'Valores',
-    texto:
-      'Trabajo directo de finca a mesa, respaldo a la agricultura familiar y fortalecimiento de la economía local de Acosta.',
+      'Servir de enlace con los diferentes grupos sociales del cantón de Acosta y lugares aledaños, mediante la gestión de proyectos socio-productivos que faculten y permitan crear una estructura administrativa moderna y eficiente, que genere ingresos económicos para mejorar la calidad de vida de las familias de los afiliados y público en general.',
   },
 ]
 
@@ -337,7 +330,7 @@ function IconCategoria({ categoria }) {
   return <Icono />
 }
 
-const ICONOS_PILAR = [IconBrote, IconHoja, IconCorazon]
+const ICONOS_PILAR = [IconBrote, IconHoja]
 
 /* =================================================================
    HEADER
@@ -492,8 +485,8 @@ function Hero({ irA }) {
 
           <Reveal delay={260}>
             <div className="hero__acciones">
-              <Boton className="boton--oscuro" onClick={() => irA('ferias')}>
-                Ver días de feria
+              <Boton className="boton--oscuro" onClick={() => irA('servicios')}>
+                Ver servicios
               </Boton>
               <Boton className="boton--fantasma" onClick={() => irA('puestos')}>
                 Ver puestos
@@ -567,77 +560,6 @@ function Nosotros() {
             })}
           </div>
         </div>
-      </div>
-    </section>
-  )
-}
-
-/* =================================================================
-   FERIAS
-   ================================================================= */
-
-function pad(n) {
-  return String(n).padStart(2, '0')
-}
-
-function Ferias() {
-  const [activo, setActivo] = useState(FERIAS[0].id)
-  const feriaActiva = useMemo(() => FERIAS.find((f) => f.id === activo), [activo])
-  const restante = useCuentaRegresiva(feriaActiva.dia, 5)
-
-  return (
-    <section id="ferias" className="seccion">
-      <div className="envoltura">
-        <Reveal>
-          <div className="cabecera-seccion">
-            <div>
-              <span className="ojo-etiqueta">— Calendario semanal</span>
-              <h2 className="titulo-seccion">Días de feria por distrito</h2>
-            </div>
-            <p className="nota-seccion">Toque un distrito para ver horario, lugar y tiempo restante.</p>
-          </div>
-        </Reveal>
-
-        <Reveal delay={80}>
-          <div className="pestanas-distrito" role="tablist" aria-label="Distritos con feria">
-            {FERIAS.map((f) => (
-              <button
-                key={f.id}
-                role="tab"
-                aria-selected={activo === f.id}
-                className={`pestana-distrito ${activo === f.id ? 'pestana-distrito--activa' : ''}`}
-                onClick={() => setActivo(f.id)}
-              >
-                <span className="pestana-distrito__dia">{f.diaTexto}</span>
-                <span className="pestana-distrito__nombre">{f.distrito}</span>
-              </button>
-            ))}
-          </div>
-        </Reveal>
-
-        <Reveal delay={140}>
-          <div className="panel-feria">
-            <div className="panel-feria__reloj">
-              <span className="panel-feria__reloj-numero">
-                {restante.dias > 0
-                  ? `${restante.dias}d ${pad(restante.horas)}h`
-                  : `${pad(restante.horas)}:${pad(restante.min)}:${pad(restante.seg)}`}
-              </span>
-              <span className="panel-feria__reloj-etiqueta">Faltan</span>
-            </div>
-            <div className="panel-feria__info">
-              <h3 className="panel-feria__titulo">
-                {feriaActiva.distrito}
-                {feriaActiva.principal && <span className="chip-principal">Feria principal</span>}
-              </h3>
-              <p className="panel-feria__meta">
-                <strong>{feriaActiva.diaTexto}</strong> · {feriaActiva.horario}
-              </p>
-              <p className="panel-feria__meta">{feriaActiva.lugar}</p>
-              <p className="panel-feria__descripcion">{feriaActiva.descripcion}</p>
-            </div>
-          </div>
-        </Reveal>
       </div>
     </section>
   )
@@ -727,6 +649,12 @@ const SERVICIOS = [
     texto:
       'Yemas de variedades seleccionadas disponibles para injertar árboles frutales y de café, y mejorar la productividad de su finca.',
     cta: 'Consultar disponibilidad',
+  },
+  {
+    num: '03',
+    titulo: 'Actividad registrada',
+    texto: 'Cultivo de productos agrícolas en combinación con la cría de animales (explotación mixta).',
+    cta: 'Más información',
   },
 ]
 
@@ -854,7 +782,6 @@ export default function App() {
       <Header activo={activo} irA={irA} />
       <Hero irA={irA} />
       <Nosotros />
-      <Ferias />
       <Puestos />
       <Servicios />
       <Contacto />
