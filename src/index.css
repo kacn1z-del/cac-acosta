@@ -1153,6 +1153,12 @@ button {
   }
 }
 
+@media (min-width: 1000px) {
+  .rejilla-servicios {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 .tarjeta-pilar--servicio {
   min-height: 250px;
 }
