@@ -247,7 +247,7 @@ button {
   position: relative;
   flex-shrink: 0;
   border-radius: 999px;
-  padding: 3px;
+  padding: 1.5px;
   background: linear-gradient(155deg, var(--dorado) 0%, rgba(196, 167, 125, 0.35) 60%, transparent 100%);
   box-shadow: 0 6px 18px rgba(26, 60, 42, 0.14);
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
@@ -265,7 +265,7 @@ button {
   border-radius: 999px;
   object-fit: cover;
   background: #fff;
-  border: 2px solid #fff;
+  border: 1px solid #fff;
 }
 
 .logo-respaldo {
@@ -702,7 +702,7 @@ button {
 
 @media (min-width: 640px) {
   .nosotros__col-tarjetas {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -713,7 +713,7 @@ button {
   border: 1px solid var(--borde);
   border-radius: 18px;
   padding: 28px;
-  min-height: 240px;
+  min-height: 320px;
   display: flex;
   flex-direction: column;
   box-shadow: var(--sombra);
@@ -1178,4 +1178,3 @@ button {
   color: var(--dorado-fuerte);
   gap: 12px;
 }
-
