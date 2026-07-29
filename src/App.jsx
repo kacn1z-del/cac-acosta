@@ -330,6 +330,52 @@ function IconCategoria({ categoria }) {
   return <Icono />
 }
 
+/** Ilustración de línea genérica del agro: montaña, sol y surcos de cultivo */
+function IlustracionAgro() {
+  return (
+    <svg viewBox="0 0 400 300" fill="none" className="ilustracion-agro" aria-hidden="true">
+      <circle cx="308" cy="70" r="30" stroke="var(--dorado)" strokeWidth="1.2" />
+      <g stroke="var(--dorado)" strokeWidth="1.2" strokeLinecap="round">
+        <path d="M308 24v-12" />
+        <path d="M308 128v-12" />
+        <path d="M354 70h12" />
+        <path d="M250 70h12" />
+        <path d="M340 32l8-8" />
+        <path d="M276 108l8-8" />
+        <path d="M340 108l8 8" />
+        <path d="M276 32l-8 8" />
+      </g>
+
+      <path
+        d="M0 190 L70 108 L120 160 L180 84 L250 176 L300 132 L400 200 V300 H0 Z"
+        fill="var(--verde)"
+        opacity="0.06"
+      />
+      <path
+        d="M0 190 L70 108 L120 160 L180 84 L250 176 L300 132 L400 200"
+        stroke="var(--verde)"
+        strokeWidth="1.4"
+        strokeLinejoin="round"
+      />
+
+      <g stroke="var(--dorado)" strokeWidth="1.1" opacity="0.75">
+        <path d="M-10 230 Q100 210 210 230 T430 230" />
+        <path d="M-10 252 Q100 232 210 252 T430 252" />
+        <path d="M-10 274 Q100 254 210 274 T430 274" />
+      </g>
+
+      <g transform="translate(60 190)">
+        <path
+          d="M0 40c14-3 28-30 28-30s26 27 26 30-40 3-54 0Z"
+          fill="var(--verde)"
+          opacity="0.9"
+        />
+        <path d="M13 40C21 30 27 15 27 10" stroke="var(--fondo)" strokeWidth="1" opacity="0.5" />
+      </g>
+    </svg>
+  )
+}
+
 const ICONOS_PILAR = [IconBrote, IconHoja]
 
 /* =================================================================
@@ -445,8 +491,6 @@ function Ticker() {
 }
 
 function Hero({ irA }) {
-  const restante = useCuentaRegresiva(6, 5) // próximo sábado, 5 a.m.
-
   return (
     <section id="inicio" className="hero">
       <span className="hero__palabra-fondo" aria-hidden="true">
@@ -497,18 +541,9 @@ function Hero({ irA }) {
 
         <div className="hero__col-tarjeta">
           <Reveal delay={150}>
-            <div className="tarjeta-cuenta">
-              <div className="tarjeta-cuenta__brillo" />
-              <span className="tarjeta-cuenta__etiqueta">Próxima feria en</span>
-              <div className="tarjeta-cuenta__numero">
-                {restante.dias}
-                <span>d</span> {restante.horas}
-                <span>h</span>
-              </div>
-              <div className="tarjeta-cuenta__linea" />
-              <p className="tarjeta-cuenta__nota">
-                San Ignacio abre cada sábado desde las 5:00 a.m.
-              </p>
+            <div className="tarjeta-ilustracion">
+              <div className="tarjeta-ilustracion__brillo" />
+              <IlustracionAgro />
             </div>
           </Reveal>
         </div>
@@ -642,6 +677,7 @@ const SERVICIOS = [
     texto:
       'Afíliese al CAC Acosta y participe con su puesto en cualquier feria del agricultor del país. Incluye el pago del carné de afiliación.',
     cta: 'Solicitar carné',
+    pago: true,
   },
   {
     num: '02',
@@ -658,7 +694,74 @@ const SERVICIOS = [
   },
 ]
 
+/** Pasarela de pago FICTICIA — solo para demostración visual al cliente. No procesa pagos reales. */
+function ModalPago({ onCerrar }) {
+  const [estado, setEstado] = useState('formulario') // formulario | procesando | exito
+
+  const enviar = (e) => {
+    e.preventDefault()
+    setEstado('procesando')
+    setTimeout(() => setEstado('exito'), 1400)
+  }
+
+  return (
+    <div className="modal-fondo" onClick={onCerrar}>
+      <div className="modal-caja" onClick={(e) => e.stopPropagation()}>
+        <span className="modal-caja__demo">Vista previa · pago simulado</span>
+        <button className="modal-caja__cerrar" onClick={onCerrar} aria-label="Cerrar">
+          ×
+        </button>
+
+        {estado !== 'exito' ? (
+          <>
+            <h3 className="modal-caja__titulo">Pago del carné de feriante</h3>
+            <p className="modal-caja__monto">₡5 000</p>
+
+            <form className="form-pago" onSubmit={enviar}>
+              <label className="form-pago__campo">
+                Nombre en la tarjeta
+                <input type="text" placeholder="Nombre completo" required />
+              </label>
+              <label className="form-pago__campo">
+                Número de tarjeta
+                <input type="text" placeholder="0000 0000 0000 0000" maxLength={19} required />
+              </label>
+              <div className="form-pago__fila">
+                <label className="form-pago__campo">
+                  Vencimiento
+                  <input type="text" placeholder="MM/AA" maxLength={5} required />
+                </label>
+                <label className="form-pago__campo">
+                  CVV
+                  <input type="text" placeholder="123" maxLength={3} required />
+                </label>
+              </div>
+
+              <Boton className="boton--oscuro form-pago__enviar" as="button" type="submit" disabled={estado === 'procesando'}>
+                {estado === 'procesando' ? 'Procesando…' : 'Pagar ₡5 000'}
+              </Boton>
+            </form>
+          </>
+        ) : (
+          <div className="modal-caja__exito">
+            <span className="modal-caja__exito-icono">✓</span>
+            <h3 className="modal-caja__titulo">Pago simulado exitoso</h3>
+            <p className="parrafo-suave" style={{ margin: '10px auto 0', maxWidth: 260 }}>
+              Esta es una demostración. Aquí se conectará la pasarela de pago real más adelante.
+            </p>
+            <Boton className="boton--fantasma" style={{ marginTop: 22 }} onClick={onCerrar}>
+              Cerrar
+            </Boton>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
 function Servicios() {
+  const [pagoAbierto, setPagoAbierto] = useState(false)
+
   return (
     <section id="servicios" className="seccion seccion--clara">
       <div className="envoltura">
@@ -681,21 +784,30 @@ function Servicios() {
                 </div>
                 <h3 className="tarjeta-pilar__titulo">{s.titulo}</h3>
                 <p className="tarjeta-pilar__texto">{s.texto}</p>
-                <a
-                  className="tarjeta-servicio__enlace"
-                  href={`https://wa.me/${CONTACTO.telefonoWa}?text=${encodeURIComponent(
-                    'Hola, quisiera información sobre ' + s.titulo
-                  )}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <IconWhatsApp tamano={14} /> {s.cta}
-                </a>
+                <div className="tarjeta-servicio__acciones">
+                  <a
+                    className="tarjeta-servicio__enlace"
+                    href={`https://wa.me/${CONTACTO.telefonoWa}?text=${encodeURIComponent(
+                      'Hola, quisiera información sobre ' + s.titulo
+                    )}`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <IconWhatsApp tamano={14} /> {s.cta}
+                  </a>
+                  {s.pago && (
+                    <button className="tarjeta-servicio__pagar" onClick={() => setPagoAbierto(true)}>
+                      Pagar carné en línea
+                    </button>
+                  )}
+                </div>
               </div>
             </Reveal>
           ))}
         </div>
       </div>
+
+      {pagoAbierto && <ModalPago onCerrar={() => setPagoAbierto(false)} />}
     </section>
   )
 }
@@ -789,4 +901,3 @@ export default function App() {
     </div>
   )
 }
-
