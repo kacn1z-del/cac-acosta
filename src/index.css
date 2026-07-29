@@ -527,91 +527,31 @@ button {
   gap: 14px;
 }
 
-.tarjeta-cuenta {
+.tarjeta-ilustracion {
   position: relative;
   overflow: hidden;
   border-radius: 22px;
   border: 1px solid rgba(196, 167, 125, 0.35);
-  background: linear-gradient(155deg, var(--verde) 0%, #234d36 55%, #0f2419 100%);
-  color: #f5f1e8;
-  padding: 40px 32px;
+  background: linear-gradient(155deg, var(--crema) 0%, #efe8d8 100%);
+  padding: 28px;
   min-height: 260px;
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: center;
   box-shadow: var(--sombra-alta);
 }
 
-.tarjeta-cuenta__brillo {
+.tarjeta-ilustracion__brillo {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 80% 0%, rgba(196, 167, 125, 0.25), transparent 55%);
+  background: radial-gradient(circle at 15% 100%, rgba(26, 60, 42, 0.06), transparent 55%);
+  pointer-events: none;
 }
 
-.tarjeta-cuenta__brillo::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -20%;
-  width: 60%;
-  height: 200%;
-  background: linear-gradient(
-    100deg,
-    transparent 30%,
-    rgba(245, 241, 232, 0.14) 48%,
-    rgba(245, 241, 232, 0.04) 52%,
-    transparent 70%
-  );
-  animation: barrido-brillo 6.5s ease-in-out infinite;
-}
-
-@keyframes barrido-brillo {
-  0% {
-    transform: translateX(-40%);
-  }
-  55%,
-  100% {
-    transform: translateX(220%);
-  }
-}
-
-.tarjeta-cuenta__etiqueta {
+.ilustracion-agro {
   position: relative;
-  text-transform: uppercase;
-  font-size: 11px;
-  letter-spacing: 0.2em;
-  opacity: 0.65;
-}
-
-.tarjeta-cuenta__numero {
-  position: relative;
-  font-family: var(--serif);
-  font-weight: 480;
-  font-size: 56px;
-  margin-top: 10px;
-  font-variant-numeric: tabular-nums;
-}
-
-.tarjeta-cuenta__numero span {
-  font-size: 20px;
-  opacity: 0.6;
-  margin-right: 6px;
-}
-
-.tarjeta-cuenta__linea {
-  position: relative;
-  width: 40px;
-  height: 1px;
-  background: var(--dorado);
-  margin: 20px 0 16px;
-}
-
-.tarjeta-cuenta__nota {
-  position: relative;
-  font-size: 12px;
-  line-height: 1.6;
-  opacity: 0.7;
-  max-width: 220px;
+  width: 100%;
+  height: auto;
 }
 
 /* ---------- ticker ---------- */
@@ -1183,4 +1123,187 @@ button {
 .tarjeta-servicio__enlace:hover {
   color: var(--dorado-fuerte);
   gap: 12px;
+}
+
+/* ---------- acciones de tarjeta de servicio ---------- */
+
+.tarjeta-servicio__acciones {
+  position: relative;
+  z-index: 1;
+  margin-top: auto;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-top: 1px solid var(--borde);
+}
+
+.tarjeta-servicio__acciones .tarjeta-servicio__enlace {
+  border-top: none;
+  padding-top: 0;
+}
+
+.tarjeta-servicio__pagar {
+  align-self: flex-start;
+  border: none;
+  background: none;
+  padding: 0;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dorado-fuerte);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+
+.tarjeta-servicio__pagar:hover {
+  color: var(--verde);
+}
+
+/* ---------- pasarela de pago ficticia (demo) ---------- */
+
+.modal-fondo {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(15, 36, 23, 0.55);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: aparecer-fondo 0.25s ease;
+}
+
+@keyframes aparecer-fondo {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-caja {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  background: var(--fondo);
+  border-radius: 20px;
+  padding: 32px 28px 28px;
+  box-shadow: var(--sombra-alta);
+  animation: aparecer-modal 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes aparecer-modal {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modal-caja__demo {
+  display: inline-block;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dorado-fuerte);
+  background: rgba(196, 167, 125, 0.16);
+  padding: 5px 12px;
+  border-radius: 999px;
+  margin-bottom: 18px;
+}
+
+.modal-caja__cerrar {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  border: none;
+  background: none;
+  font-size: 22px;
+  line-height: 1;
+  color: var(--verde);
+  opacity: 0.5;
+}
+
+.modal-caja__cerrar:hover {
+  opacity: 1;
+}
+
+.modal-caja__titulo {
+  font-size: 21px;
+}
+
+.modal-caja__monto {
+  font-family: var(--serif);
+  font-size: 32px;
+  margin-top: 6px;
+  color: var(--dorado-fuerte);
+}
+
+.form-pago {
+  margin-top: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.form-pago__campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.6;
+  flex: 1;
+}
+
+.form-pago__campo input {
+  font-family: var(--sans);
+  font-size: 14px;
+  letter-spacing: normal;
+  text-transform: none;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--borde);
+  background: #fff;
+  color: var(--verde);
+}
+
+.form-pago__campo input:focus {
+  outline: none;
+  border-color: var(--dorado);
+}
+
+.form-pago__fila {
+  display: flex;
+  gap: 12px;
+}
+
+.form-pago__enviar {
+  width: 100%;
+  margin-top: 6px;
+}
+
+.modal-caja__exito {
+  text-align: center;
+  padding: 20px 0 8px;
+}
+
+.modal-caja__exito-icono {
+  display: inline-grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  background: var(--verde);
+  color: #fff;
+  font-size: 24px;
+  margin-bottom: 18px;
 }
