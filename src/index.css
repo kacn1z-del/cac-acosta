@@ -1145,6 +1145,9 @@ button {
 
 .tarjeta-servicio__pagar {
   align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
   border: none;
   background: none;
   padding: 0;
@@ -1152,9 +1155,12 @@ button {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--dorado-fuerte);
+  transition: color 0.2s ease;
+}
+
+.tarjeta-servicio__pagar span {
   text-decoration: underline;
   text-underline-offset: 3px;
-  transition: color 0.2s ease;
 }
 
 .tarjeta-servicio__pagar:hover {
@@ -1239,10 +1245,16 @@ button {
   font-size: 21px;
 }
 
+.modal-caja__monto-fila {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 6px;
+}
+
 .modal-caja__monto {
   font-family: var(--serif);
   font-size: 32px;
-  margin-top: 6px;
   color: var(--dorado-fuerte);
 }
 
@@ -1307,4 +1319,3 @@ button {
   font-size: 24px;
   margin-bottom: 18px;
 }
-
