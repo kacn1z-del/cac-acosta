@@ -142,7 +142,7 @@ function Boton({ children, className = '', as = 'button', ...props }) {
   )
 }
 
-function LogoAlba({ tamano = 44 }) {
+function LogoAlba({ tamano = 64 }) {
   return (
     <div className="logo-marco" style={{ width: tamano, height: tamano }}>
       <img className="logo-img" src="/logo-alba.png" alt="Catering Alba" />
@@ -235,7 +235,7 @@ function Header({ activo, irA }) {
             irA('inicio')
           }}
         >
-          <LogoAlba tamano={40} />
+          <LogoAlba tamano={60} />
           <span>Catering Alba</span>
         </a>
 
@@ -553,7 +553,7 @@ function Pie() {
     <footer className="pie">
       <div className="envoltura pie__fila">
         <div className="pie__marca">
-          <LogoAlba tamano={28} />
+          <LogoAlba tamano={44} />
           <span>Catering Alba</span>
         </div>
         <div className="pie__distritos">
