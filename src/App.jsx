@@ -74,6 +74,14 @@ const SERVICIOS = [
 
 const CATEGORIAS = ['Todos', 'Entradas', 'Platos fuertes', 'Postres', 'Bebidas']
 
+const CARRUSEL = [
+  { img: '/galeria/evento-05.jpeg', etiqueta: 'Bodas', titulo: 'Montajes de boda' },
+  { img: '/galeria/evento-13.jpeg', etiqueta: 'Cumpleaños', titulo: 'Celebraciones especiales' },
+  { img: '/galeria/evento-16.jpeg', etiqueta: 'Detalles', titulo: 'Ambientación a la medida' },
+  { img: '/galeria/evento-04.jpeg', etiqueta: 'Eventos', titulo: 'Salones completos' },
+  { img: '/galeria/evento-10.jpeg', etiqueta: 'Mesas', titulo: 'Centros de mesa florales' },
+]
+
 const MENU = [
   { nombre: 'Carpaccio de res', categoria: 'Entradas', desc: 'Finas láminas de res, alcaparras, parmesano y aceite de oliva.' },
   { nombre: 'Tartaleta de camarón', categoria: 'Entradas', desc: 'Base crocante, camarón salteado y salsa cítrica.' },
@@ -501,6 +509,58 @@ function Servicios() {
 }
 
 /* =================================================================
+   CARRUSEL
+   ================================================================= */
+
+function Carrusel() {
+  const [activo, setActivo] = useState(0)
+
+  useEffect(() => {
+    const t = setInterval(() => {
+      setActivo((i) => (i + 1) % CARRUSEL.length)
+    }, 4500)
+    return () => clearInterval(t)
+  }, [])
+
+  const irA = (i) => setActivo(i)
+  const anterior = () => setActivo((i) => (i - 1 + CARRUSEL.length) % CARRUSEL.length)
+  const siguiente = () => setActivo((i) => (i + 1) % CARRUSEL.length)
+
+  return (
+    <div className="carrusel">
+      {CARRUSEL.map((c, i) => (
+        <div key={c.img} className={`carrusel__slide ${i === activo ? 'carrusel__slide--activo' : ''}`}>
+          <img src={c.img} alt={c.titulo} />
+          <div className="carrusel__overlay" />
+          <div className="carrusel__texto">
+            <span className="carrusel__etiqueta">{c.etiqueta}</span>
+            <h3 className="carrusel__titulo">{c.titulo}</h3>
+          </div>
+        </div>
+      ))}
+
+      <button className="carrusel__flecha carrusel__flecha--izq" onClick={anterior} aria-label="Anterior">
+        <IconFlecha direccion="izq" />
+      </button>
+      <button className="carrusel__flecha carrusel__flecha--der" onClick={siguiente} aria-label="Siguiente">
+        <IconFlecha direccion="der" />
+      </button>
+
+      <div className="carrusel__puntos">
+        {CARRUSEL.map((c, i) => (
+          <button
+            key={c.img}
+            className={`carrusel__punto ${i === activo ? 'carrusel__punto--activo' : ''}`}
+            onClick={() => irA(i)}
+            aria-label={`Ir a diapositiva ${i + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+  )
+}
+
+/* =================================================================
    MENÚ
    ================================================================= */
 
@@ -522,29 +582,40 @@ function Menu() {
         </Reveal>
 
         <Reveal>
-          <div className="filtro-categorias">
-            {CATEGORIAS.map((c) => (
-              <button
-                key={c}
-                className={`filtro-categorias__boton ${filtro === c ? 'filtro-categorias__boton--activo' : ''}`}
-                onClick={() => setFiltro(c)}
-              >
-                {c}
-              </button>
-            ))}
-          </div>
+          <Carrusel />
         </Reveal>
 
-        <div className="rejilla-puestos">
-          {items.map((m, i) => (
-            <Reveal key={m.nombre} delay={(i % 4) * 80}>
-              <div className="tarjeta-puesto">
-                <span className="tarjeta-puesto__categoria">{m.categoria}</span>
-                <h3 className="tarjeta-puesto__nombre">{m.nombre}</h3>
-                <p className="tarjeta-puesto__desc">{m.desc}</p>
+        <div className="tienda-layout">
+          <Reveal className="tienda-layout__aside">
+            <div className="tienda-categorias">
+              <span className="tienda-categorias__titulo">Categorías</span>
+              <div className="tienda-categorias__lista">
+                {CATEGORIAS.map((c) => (
+                  <button
+                    key={c}
+                    className={`tienda-categorias__item ${filtro === c ? 'tienda-categorias__item--activo' : ''}`}
+                    onClick={() => setFiltro(c)}
+                  >
+                    {c}
+                  </button>
+                ))}
               </div>
-            </Reveal>
-          ))}
+            </div>
+          </Reveal>
+
+          <div className="tienda-layout__contenido">
+            <div className="rejilla-puestos">
+              {items.map((m, i) => (
+                <Reveal key={m.nombre} delay={(i % 4) * 80}>
+                  <div className="tarjeta-puesto">
+                    <span className="tarjeta-puesto__categoria">{m.categoria}</span>
+                    <h3 className="tarjeta-puesto__nombre">{m.nombre}</h3>
+                    <p className="tarjeta-puesto__desc">{m.desc}</p>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -743,4 +814,3 @@ export default function App() {
     </div>
   )
 }
-
