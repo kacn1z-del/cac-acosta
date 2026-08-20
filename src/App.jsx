@@ -93,31 +93,31 @@ const BENEFICIOS = [
 ]
 
 const GALERIA = [
-  { tipo: 'foto', src: '/galeria/evento-03.jpg', thumb: '/galeria/evento-03-thumb.jpg' },
-  { tipo: 'video', src: '/galeria/evento-video.mp4', thumb: '/galeria/evento-video-poster.jpg' },
-  { tipo: 'foto', src: '/galeria/evento-16.jpg', thumb: '/galeria/evento-16-thumb.jpg' },
-  { tipo: 'foto', src: '/galeria/evento-04.jpg', thumb: '/galeria/evento-04-thumb.jpg' },
-  { tipo: 'foto', src: '/galeria/evento-05.jpg', thumb: '/galeria/evento-05-thumb.jpg' },
-  { tipo: 'foto', src: '/galeria/evento-02.jpg', thumb: '/galeria/evento-02-thumb.jpg' },
-  { tipo: 'foto', src: '/galeria/evento-01.jpg', thumb: '/galeria/evento-01-thumb.jpg' },
-  { tipo: 'foto', src: '/galeria/evento-06.jpg', thumb: '/galeria/evento-06-thumb.jpg' },
-  { tipo: 'foto', src: '/galeria/evento-07.jpg', thumb: '/galeria/evento-07-thumb.jpg' },
-  { tipo: 'foto', src: '/galeria/evento-13.jpg', thumb: '/galeria/evento-13-thumb.jpg' },
-  { tipo: 'foto', src: '/galeria/evento-09.jpg', thumb: '/galeria/evento-09-thumb.jpg' },
-  { tipo: 'foto', src: '/galeria/evento-10.jpg', thumb: '/galeria/evento-10-thumb.jpg' },
-  { tipo: 'foto', src: '/galeria/evento-11.jpg', thumb: '/galeria/evento-11-thumb.jpg' },
-  { tipo: 'foto', src: '/galeria/evento-12.jpg', thumb: '/galeria/evento-12-thumb.jpg' },
-  { tipo: 'foto', src: '/galeria/evento-17.jpg', thumb: '/galeria/evento-17-thumb.jpg' },
-  { tipo: 'foto', src: '/galeria/evento-20.jpg', thumb: '/galeria/evento-20-thumb.jpg' },
-  { tipo: 'foto', src: '/galeria/evento-08.jpg', thumb: '/galeria/evento-08-thumb.jpg' },
-  { tipo: 'foto', src: '/galeria/evento-14.jpg', thumb: '/galeria/evento-14-thumb.jpg' },
-  { tipo: 'foto', src: '/galeria/evento-15.jpg', thumb: '/galeria/evento-15-thumb.jpg' },
-  { tipo: 'foto', src: '/galeria/evento-18.jpg', thumb: '/galeria/evento-18-thumb.jpg' },
-  { tipo: 'foto', src: '/galeria/evento-19.jpg', thumb: '/galeria/evento-19-thumb.jpg' },
-  { tipo: 'foto', src: '/galeria/evento-21.jpg', thumb: '/galeria/evento-21-thumb.jpg' },
-  { tipo: 'foto', src: '/galeria/evento-22.jpg', thumb: '/galeria/evento-22-thumb.jpg' },
-  { tipo: 'foto', src: '/galeria/evento-23.jpg', thumb: '/galeria/evento-23-thumb.jpg' },
-  { tipo: 'foto', src: '/galeria/evento-24.jpg', thumb: '/galeria/evento-24-thumb.jpg' },
+  { tipo: 'foto', src: '/galeria/evento-03.jpeg', thumb: '/galeria/evento-03-thumb.jpeg' },
+  { tipo: 'video', src: '/galeria/evento-video.mp4', thumb: '/galeria/evento-video-poster.jpeg' },
+  { tipo: 'foto', src: '/galeria/evento-16.jpeg', thumb: '/galeria/evento-16-thumb.jpeg' },
+  { tipo: 'foto', src: '/galeria/evento-04.jpeg', thumb: '/galeria/evento-04-thumb.jpeg' },
+  { tipo: 'foto', src: '/galeria/evento-05.jpeg', thumb: '/galeria/evento-05-thumb.jpeg' },
+  { tipo: 'foto', src: '/galeria/evento-02.jpeg', thumb: '/galeria/evento-02-thumb.jpeg' },
+  { tipo: 'foto', src: '/galeria/evento-01.jpeg', thumb: '/galeria/evento-01-thumb.jpeg' },
+  { tipo: 'foto', src: '/galeria/evento-06.jpeg', thumb: '/galeria/evento-06-thumb.jpeg' },
+  { tipo: 'foto', src: '/galeria/evento-07.jpeg', thumb: '/galeria/evento-07-thumb.jpeg' },
+  { tipo: 'foto', src: '/galeria/evento-13.jpeg', thumb: '/galeria/evento-13-thumb.jpeg' },
+  { tipo: 'foto', src: '/galeria/evento-09.jpeg', thumb: '/galeria/evento-09-thumb.jpeg' },
+  { tipo: 'foto', src: '/galeria/evento-10.jpeg', thumb: '/galeria/evento-10-thumb.jpeg' },
+  { tipo: 'foto', src: '/galeria/evento-11.jpeg', thumb: '/galeria/evento-11-thumb.jpeg' },
+  { tipo: 'foto', src: '/galeria/evento-12.jpeg', thumb: '/galeria/evento-12-thumb.jpeg' },
+  { tipo: 'foto', src: '/galeria/evento-17.jpeg', thumb: '/galeria/evento-17-thumb.jpeg' },
+  { tipo: 'foto', src: '/galeria/evento-20.jpeg', thumb: '/galeria/evento-20-thumb.jpeg' },
+  { tipo: 'foto', src: '/galeria/evento-08.jpeg', thumb: '/galeria/evento-08-thumb.jpeg' },
+  { tipo: 'foto', src: '/galeria/evento-14.jpeg', thumb: '/galeria/evento-14-thumb.jpeg' },
+  { tipo: 'foto', src: '/galeria/evento-15.jpeg', thumb: '/galeria/evento-15-thumb.jpeg' },
+  { tipo: 'foto', src: '/galeria/evento-18.jpeg', thumb: '/galeria/evento-18-thumb.jpeg' },
+  { tipo: 'foto', src: '/galeria/evento-19.jpeg', thumb: '/galeria/evento-19-thumb.jpeg' },
+  { tipo: 'foto', src: '/galeria/evento-21.jpeg', thumb: '/galeria/evento-21-thumb.jpeg' },
+  { tipo: 'foto', src: '/galeria/evento-22.jpeg', thumb: '/galeria/evento-22-thumb.jpeg' },
+  { tipo: 'foto', src: '/galeria/evento-23.jpeg', thumb: '/galeria/evento-23-thumb.jpeg' },
+  { tipo: 'foto', src: '/galeria/evento-24.jpeg', thumb: '/galeria/evento-24-thumb.jpeg' },
 ]
 
 /* =================================================================
@@ -605,7 +605,7 @@ function Galeria() {
           {GALERIA.map((g, i) => (
             <Reveal key={g.src} delay={(i % 6) * 60}>
               <button className="galeria-item" onClick={() => abrir(i)} aria-label="Ver imagen">
-                <img src={g.thumb} alt="Evento Catering Alba" loading="lazy" />
+                <img src={g.thumb} alt="Evento Catering Alba" />
                 {g.tipo === 'video' && (
                   <span className="galeria-item__play">
                     <IconPlay />
@@ -743,4 +743,3 @@ export default function App() {
     </div>
   )
 }
-
