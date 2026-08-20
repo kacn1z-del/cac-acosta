@@ -179,9 +179,9 @@ function Boton({ children, className = '', as = 'button', ...props }) {
   )
 }
 
-function LogoAlba({ tamano = 64 }) {
+function LogoAlba({ tamano = 64, className = '' }) {
   return (
-    <div className="logo-marco" style={{ width: tamano, height: tamano }}>
+    <div className={`logo-marco ${className}`} style={className ? undefined : { width: tamano, height: tamano }}>
       <img className="logo-img" src="/logo-alba.png" alt="Catering Alba" />
     </div>
   )
@@ -321,6 +321,9 @@ function IconFlecha({ direccion = 'izq' }) {
    HEADER
    ================================================================= */
 
+const NAV_IZQ = NAV.slice(0, 3)
+const NAV_DER = NAV.slice(3)
+
 function Header({ activo, irA }) {
   const [scrolled, setScrolled] = useState(false)
   const [menuAbierto, setMenuAbierto] = useState(false)
@@ -335,52 +338,72 @@ function Header({ activo, irA }) {
   return (
     <header className={`encabezado ${scrolled ? 'encabezado--scroll' : ''}`}>
       <div className="envoltura encabezado__fila">
+        <div className="encabezado__grupo encabezado__grupo--izq">
+          <nav className="encabezado__nav">
+            {NAV_IZQ.map((n) => (
+              <a
+                key={n.id}
+                href={`#${n.id}`}
+                className={`encabezado__enlace ${activo === n.id ? 'encabezado__enlace--activo' : ''}`}
+                onClick={(e) => {
+                  e.preventDefault()
+                  irA(n.id)
+                }}
+              >
+                {n.label}
+              </a>
+            ))}
+          </nav>
+        </div>
+
         <a
-          className="encabezado__marca"
+          className="encabezado__medallon"
           href="#inicio"
+          aria-label="Catering Alba — Inicio"
           onClick={(e) => {
             e.preventDefault()
             irA('inicio')
           }}
         >
-          <LogoAlba tamano={60} />
-          <span>Catering Alba</span>
+          <LogoAlba className="logo-marco--medallon" />
         </a>
 
-        <nav className="encabezado__nav">
-          {NAV.map((n) => (
-            <a
-              key={n.id}
-              href={`#${n.id}`}
-              className={`encabezado__enlace ${activo === n.id ? 'encabezado__enlace--activo' : ''}`}
-              onClick={(e) => {
-                e.preventDefault()
-                irA(n.id)
-              }}
-            >
-              {n.label}
-            </a>
-          ))}
-        </nav>
+        <div className="encabezado__grupo encabezado__grupo--der">
+          <nav className="encabezado__nav">
+            {NAV_DER.map((n) => (
+              <a
+                key={n.id}
+                href={`#${n.id}`}
+                className={`encabezado__enlace ${activo === n.id ? 'encabezado__enlace--activo' : ''}`}
+                onClick={(e) => {
+                  e.preventDefault()
+                  irA(n.id)
+                }}
+              >
+                {n.label}
+              </a>
+            ))}
+          </nav>
 
-        <a
-          className="encabezado__whatsapp"
-          href={`https://wa.me/${CONTACTO.telefonoWa}`}
-          target="_blank"
-          rel="noreferrer"
-        >
-          <IconWhatsApp /> {CONTACTO.telefonoDisplay}
-        </a>
+          <a
+            className="encabezado__whatsapp"
+            href={`https://wa.me/${CONTACTO.telefonoWa}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <IconWhatsApp /> {CONTACTO.telefonoDisplay}
+          </a>
 
-        <button
-          className="encabezado__hamburguesa"
-          aria-label="Abrir menú"
-          onClick={() => setMenuAbierto((v) => !v)}
-        >
-          <span />
-          <span />
-          <span />
-        </button>
+          <button
+            className="encabezado__hamburguesa"
+            aria-label="Abrir menú"
+            onClick={() => setMenuAbierto((v) => !v)}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+        </div>
       </div>
 
       {menuAbierto && (
@@ -412,6 +435,12 @@ function Header({ activo, irA }) {
    ================================================================= */
 
 function Hero({ irA }) {
+  const [tipoEvento, setTipoEvento] = useState('')
+
+  const buscar = () => {
+    if (tipoEvento) irA('servicios')
+  }
+
   return (
     <section id="inicio" className="hero">
       <div className="envoltura hero__envoltura">
@@ -430,7 +459,35 @@ function Hero({ irA }) {
               y celebraciones especiales en todo Costa Rica.
             </p>
           </Reveal>
+
           <Reveal delay={220}>
+            <div className="hero__planeando">
+              <span className="hero__planeando-etiqueta">Estoy planeando un:</span>
+              <div className="hero__planeando-campo">
+                <select
+                  value={tipoEvento}
+                  onChange={(e) => setTipoEvento(e.target.value)}
+                  aria-label="Tipo de evento"
+                >
+                  <option value="">Seleccione el tipo de evento</option>
+                  {SERVICIOS.map((s) => (
+                    <option key={s.num} value={s.titulo}>
+                      {s.titulo}
+                    </option>
+                  ))}
+                </select>
+                <button
+                  className="hero__planeando-boton"
+                  onClick={buscar}
+                  aria-label="Buscar servicios"
+                >
+                  <IconFlecha direccion="der" />
+                </button>
+              </div>
+            </div>
+          </Reveal>
+
+          <Reveal delay={280}>
             <div className="hero__acciones">
               <Boton
                 as="a"
@@ -450,7 +507,7 @@ function Hero({ irA }) {
           </Reveal>
         </div>
 
-        <Reveal delay={280} className="hero__col-imagen">
+        <Reveal delay={340} className="hero__col-imagen">
           <div className="hero__imagen-marco">
             <div className="hero__iconos-servicio">
               {ICONOS_SERVICIO_HERO.map(({ Icono, etiqueta }) => (
@@ -461,11 +518,14 @@ function Hero({ irA }) {
               ))}
             </div>
 
-            <img
-              className="hero__imagen-principal"
-              src="/galeria/evento-04.jpeg"
-              alt="Montaje de evento por Catering Alba"
-            />
+            <div className="hero__imagen-envoltura">
+              <img
+                className="hero__imagen-principal"
+                src="/galeria/evento-16.jpeg"
+                alt="Ambientación de evento por Catering Alba"
+              />
+              <div className="hero__imagen-velo" />
+            </div>
 
             <div className="hero__tarjeta-flotante">
               <img
@@ -944,4 +1004,3 @@ export default function App() {
     </div>
   )
 }
-
