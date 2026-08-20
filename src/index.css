@@ -11,6 +11,7 @@
   --negro-suave: rgba(17, 17, 17, 0.7);
   --plata: #b7b7b7;
   --plata-fuerte: #8f8f8f;
+  --gris-texto-accesible: #6b6b6b; /* pasa contraste AA sobre fondos claros; usar en vez de --plata-fuerte para texto */
   --hueso: #f2f0eb;
   --fondo: #faf9f6;
   --borde: rgba(17, 17, 17, 0.1);
@@ -68,6 +69,26 @@ button {
 
 a {
   color: inherit;
+}
+
+.salto-contenido {
+  position: absolute;
+  top: -60px;
+  left: 16px;
+  z-index: 1000;
+  background: #fff;
+  color: var(--negro);
+  padding: 12px 20px;
+  border-radius: 8px;
+  box-shadow: var(--sombra-alta);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: top 0.2s ease;
+}
+
+.salto-contenido:focus {
+  top: 16px;
 }
 
 .envoltura {
@@ -425,6 +446,11 @@ a {
   }
 }
 
+.encabezado__movil-nav {
+  display: flex;
+  flex-direction: column;
+}
+
 .encabezado__movil a {
   display: flex;
   align-items: center;
@@ -471,7 +497,7 @@ a {
 .hero__titulo--oscuro em {
   font-style: italic;
   font-family: var(--script);
-  color: var(--plata-fuerte);
+  color: var(--gris-texto-accesible);
   font-weight: 500;
 }
 
@@ -538,8 +564,10 @@ a {
   cursor: pointer;
 }
 
-.hero__planeando-campo select:focus {
-  outline: none;
+.hero__planeando-campo select:focus-visible {
+  outline: 2px solid var(--negro);
+  outline-offset: -2px;
+  border-radius: 4px;
 }
 
 .hero__planeando-boton {
@@ -1287,7 +1315,7 @@ a {
   font-size: 10px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--plata-fuerte);
+  color: var(--gris-texto-accesible);
   margin-bottom: 10px;
 }
 
