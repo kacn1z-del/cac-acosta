@@ -48,6 +48,7 @@ const SERVICIOS = [
     texto:
       'Menús completos para el día más importante: entradas, plato fuerte, postre y mesa de dulces, con montaje acorde a la decoración de su boda.',
     cta: 'Cotizar boda',
+    img: '/galeria/evento-05.jpeg',
   },
   {
     num: '02',
@@ -55,6 +56,7 @@ const SERVICIOS = [
     texto:
       'Coffee breaks, almuerzos empresariales y cócteles de cierre para reuniones, capacitaciones y lanzamientos.',
     cta: 'Cotizar evento corporativo',
+    img: '/galeria/evento-12.jpeg',
   },
   {
     num: '03',
@@ -62,6 +64,7 @@ const SERVICIOS = [
     texto:
       'Celebraciones a la medida, con opciones de buffet o servicio a la mesa según el estilo de la fiesta.',
     cta: 'Cotizar celebración',
+    img: '/galeria/evento-13.jpeg',
   },
   {
     num: '04',
@@ -69,6 +72,7 @@ const SERVICIOS = [
     texto:
       'Pasapalos y estaciones interactivas ideales para recepciones, inauguraciones y encuentros sociales.',
     cta: 'Cotizar cóctel',
+    img: '/galeria/evento-16.jpeg',
   },
 ]
 
@@ -460,6 +464,10 @@ function Hero({ irA }) {
             </p>
           </Reveal>
 
+          <Reveal delay={200}>
+            <p className="hero__frase-impacto">Elija entre nuestros 4 tipos de servicio</p>
+          </Reveal>
+
           <Reveal delay={220}>
             <div className="hero__planeando">
               <span className="hero__planeando-etiqueta">Estoy planeando un:</span>
@@ -621,17 +629,17 @@ function Servicios() {
           </div>
         </Reveal>
 
-        <div className="rejilla-servicios">
+        <div className="fila-platos">
           {SERVICIOS.map((s, i) => (
             <Reveal key={s.num} delay={i * 100}>
-              <div className="tarjeta-pilar tarjeta-pilar--servicio tarjeta-pilar--oscura" data-num={s.num}>
-                <div className="tarjeta-pilar__cabecera">
-                  <span className="tarjeta-pilar__num">{s.num}</span>
+              <div className="plato-servicio">
+                <div className="plato-servicio__marco">
+                  <img className="plato-servicio__img" src={s.img} alt={s.titulo} />
                 </div>
-                <h3 className="tarjeta-pilar__titulo">{s.titulo}</h3>
-                <p className="tarjeta-pilar__texto">{s.texto}</p>
+                <h3 className="plato-servicio__titulo">{s.titulo}</h3>
+                <p className="plato-servicio__texto">{s.texto}</p>
                 <a
-                  className="tarjeta-servicio__enlace tarjeta-servicio__enlace--claro"
+                  className="plato-servicio__enlace"
                   href={`https://wa.me/${CONTACTO.telefonoWa}?text=${encodeURIComponent(
                     'Hola, quisiera información sobre ' + s.titulo
                   )}`}
