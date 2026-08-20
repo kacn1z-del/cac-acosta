@@ -246,6 +246,53 @@ function IconAjuste() {
 
 const ICONOS_CARACTERISTICA = [IconEstrella, IconPlato, IconReloj, IconAjuste]
 
+function IconAnillos() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25">
+      <circle cx="9" cy="14" r="5.5" />
+      <circle cx="16" cy="10" r="5.5" />
+    </svg>
+  )
+}
+
+function IconMaletin() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25">
+      <rect x="2.75" y="7.5" width="18.5" height="12" rx="1.6" />
+      <path d="M8 7.5V6a2.5 2.5 0 0 1 2.5-2.5h3A2.5 2.5 0 0 1 16 6v1.5" />
+      <path d="M2.75 13h18.5" />
+    </svg>
+  )
+}
+
+function IconPastel() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25">
+      <path d="M12 3v3" />
+      <path d="M12 6c-1 0-1 1.4-2 1.4S9 6 8 6" />
+      <rect x="4" y="10" width="16" height="9.5" rx="1.4" />
+      <path d="M4 15.2c1.4 0 1.4-1.4 2.8-1.4s1.4 1.4 2.8 1.4 1.4-1.4 2.8-1.4 1.4 1.4 2.8 1.4 1.4-1.4 2.8-1.4" />
+    </svg>
+  )
+}
+
+function IconCopa() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25">
+      <path d="M6 3h12l-1 6.2A5 5 0 0 1 12 13.8a5 5 0 0 1-5-4.6L6 3Z" />
+      <path d="M12 13.8V19" />
+      <path d="M8 21h8" />
+    </svg>
+  )
+}
+
+const ICONOS_SERVICIO_HERO = [
+  { Icono: IconAnillos, etiqueta: 'Bodas' },
+  { Icono: IconMaletin, etiqueta: 'Corporativo' },
+  { Icono: IconPastel, etiqueta: 'Cumpleaños' },
+  { Icono: IconCopa, etiqueta: 'Cócteles' },
+]
+
 function IconPlay() {
   return (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -367,41 +414,75 @@ function Header({ activo, irA }) {
 function Hero({ irA }) {
   return (
     <section id="inicio" className="hero">
-      <div className="hero__textura" />
-      <div className="envoltura hero__contenido">
-        <Reveal>
-          <span className="ojo-etiqueta ojo-etiqueta--claro">— Catering para eventos</span>
-        </Reveal>
-        <Reveal delay={80}>
-          <h1 className="hero__titulo">
-            Catering <em>Alba</em>
-          </h1>
-        </Reveal>
-        <Reveal delay={160}>
-          <p className="hero__subtitulo">
-            Menús elegantes y servicio impecable para bodas, eventos corporativos, cumpleaños
-            y celebraciones especiales en todo Costa Rica.
-          </p>
-        </Reveal>
-        <Reveal delay={240}>
-          <div className="hero__acciones">
-            <Boton
-              as="a"
-              className="boton--claro"
-              href={`https://wa.me/${CONTACTO.telefonoWa}?text=${encodeURIComponent(
-                'Hola, quisiera cotizar el servicio de catering para mi evento.'
-              )}`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <IconWhatsApp /> Cotizar mi evento
-            </Boton>
-            <Boton
-              className="boton--fantasma-claro"
-              onClick={() => irA('menu')}
-            >
-              Ver menú
-            </Boton>
+      <div className="envoltura hero__envoltura">
+        <div className="hero__col-texto">
+          <Reveal>
+            <span className="ojo-etiqueta">— Catering para eventos</span>
+          </Reveal>
+          <Reveal delay={80}>
+            <h1 className="hero__titulo hero__titulo--oscuro">
+              Catering <em>Alba</em>
+            </h1>
+          </Reveal>
+          <Reveal delay={160}>
+            <p className="hero__subtitulo hero__subtitulo--oscuro">
+              Menús elegantes y servicio impecable para bodas, eventos corporativos, cumpleaños
+              y celebraciones especiales en todo Costa Rica.
+            </p>
+          </Reveal>
+          <Reveal delay={220}>
+            <div className="hero__acciones">
+              <Boton
+                as="a"
+                className="boton--oscuro"
+                href={`https://wa.me/${CONTACTO.telefonoWa}?text=${encodeURIComponent(
+                  'Hola, quisiera cotizar el servicio de catering para mi evento.'
+                )}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <IconWhatsApp /> Cotizar mi evento
+              </Boton>
+              <Boton className="boton--fantasma-oscuro" onClick={() => irA('menu')}>
+                Ver menú
+              </Boton>
+            </div>
+          </Reveal>
+        </div>
+
+        <Reveal delay={280} className="hero__col-imagen">
+          <div className="hero__imagen-marco">
+            <div className="hero__iconos-servicio">
+              {ICONOS_SERVICIO_HERO.map(({ Icono, etiqueta }) => (
+                <div key={etiqueta} className="hero__icono-servicio">
+                  <Icono />
+                  <span>{etiqueta}</span>
+                </div>
+              ))}
+            </div>
+
+            <img
+              className="hero__imagen-principal"
+              src="/galeria/evento-04.jpeg"
+              alt="Montaje de evento por Catering Alba"
+            />
+
+            <div className="hero__tarjeta-flotante">
+              <img
+                className="hero__tarjeta-flotante-img"
+                src="/galeria/evento-13.jpeg"
+                alt="Mesa servida por Catering Alba"
+              />
+              <div className="hero__tarjeta-flotante-cuerpo">
+                <span className="hero__tarjeta-flotante-etiqueta">Nuestros menús</span>
+                <p className="hero__tarjeta-flotante-texto">
+                  Propuestas a la medida para cada tipo de celebración.
+                </p>
+                <button className="hero__tarjeta-flotante-boton" onClick={() => irA('menu')}>
+                  Ver menú
+                </button>
+              </div>
+            </div>
           </div>
         </Reveal>
       </div>
@@ -500,6 +581,54 @@ function Servicios() {
                   <IconWhatsApp tamano={14} /> {s.cta}
                 </a>
               </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* =================================================================
+   ACCESOS RÁPIDOS (grid de 3 bloques)
+   ================================================================= */
+
+const ACCESOS_RAPIDOS = [
+  {
+    id: 'menu',
+    img: '/galeria/evento-09.jpeg',
+    titulo: 'Vea nuestro menú',
+    texto: 'Entradas, platos fuertes, postres y bebidas para su evento.',
+  },
+  {
+    id: 'galeria',
+    img: '/galeria/evento-17.jpeg',
+    titulo: 'Explore la galería',
+    texto: 'Montajes y celebraciones que hemos hecho realidad.',
+  },
+  {
+    id: 'contacto',
+    img: '/galeria/evento-12.jpeg',
+    titulo: 'Cotice su evento',
+    texto: 'Escríbanos y le preparamos una propuesta a la medida.',
+  },
+]
+
+function AccesosRapidos({ irA }) {
+  return (
+    <section className="seccion seccion--clara accesos">
+      <div className="envoltura">
+        <div className="rejilla-accesos">
+          {ACCESOS_RAPIDOS.map((a, i) => (
+            <Reveal key={a.id} delay={i * 100}>
+              <button className="tarjeta-acceso" onClick={() => irA(a.id)}>
+                <img className="tarjeta-acceso__img" src={a.img} alt={a.titulo} />
+                <div className="tarjeta-acceso__velo" />
+                <div className="tarjeta-acceso__cuerpo">
+                  <h3 className="tarjeta-acceso__titulo">{a.titulo}</h3>
+                  <p className="tarjeta-acceso__texto">{a.texto}</p>
+                </div>
+              </button>
             </Reveal>
           ))}
         </div>
@@ -807,6 +936,7 @@ export default function App() {
       <Hero irA={irA} />
       <Nosotros />
       <Servicios />
+      <AccesosRapidos irA={irA} />
       <Menu />
       <Galeria />
       <Contacto />
