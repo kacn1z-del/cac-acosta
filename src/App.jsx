@@ -105,31 +105,31 @@ const BENEFICIOS = [
 ]
 
 const GALERIA = [
-  { tipo: 'foto', src: '/galeria/evento-03.jpeg', thumb: '/galeria/evento-03-thumb.jpeg' },
-  { tipo: 'video', src: '/galeria/evento-video.mp4', thumb: '/galeria/evento-video-poster.jpeg' },
-  { tipo: 'foto', src: '/galeria/evento-16.jpeg', thumb: '/galeria/evento-16-thumb.jpeg' },
-  { tipo: 'foto', src: '/galeria/evento-04.jpeg', thumb: '/galeria/evento-04-thumb.jpeg' },
-  { tipo: 'foto', src: '/galeria/evento-05.jpeg', thumb: '/galeria/evento-05-thumb.jpeg' },
-  { tipo: 'foto', src: '/galeria/evento-02.jpeg', thumb: '/galeria/evento-02-thumb.jpeg' },
-  { tipo: 'foto', src: '/galeria/evento-01.jpeg', thumb: '/galeria/evento-01-thumb.jpeg' },
-  { tipo: 'foto', src: '/galeria/evento-06.jpeg', thumb: '/galeria/evento-06-thumb.jpeg' },
-  { tipo: 'foto', src: '/galeria/evento-07.jpeg', thumb: '/galeria/evento-07-thumb.jpeg' },
-  { tipo: 'foto', src: '/galeria/evento-13.jpeg', thumb: '/galeria/evento-13-thumb.jpeg' },
-  { tipo: 'foto', src: '/galeria/evento-09.jpeg', thumb: '/galeria/evento-09-thumb.jpeg' },
-  { tipo: 'foto', src: '/galeria/evento-10.jpeg', thumb: '/galeria/evento-10-thumb.jpeg' },
-  { tipo: 'foto', src: '/galeria/evento-11.jpeg', thumb: '/galeria/evento-11-thumb.jpeg' },
-  { tipo: 'foto', src: '/galeria/evento-12.jpeg', thumb: '/galeria/evento-12-thumb.jpeg' },
-  { tipo: 'foto', src: '/galeria/evento-17.jpeg', thumb: '/galeria/evento-17-thumb.jpeg' },
-  { tipo: 'foto', src: '/galeria/evento-20.jpeg', thumb: '/galeria/evento-20-thumb.jpeg' },
-  { tipo: 'foto', src: '/galeria/evento-08.jpeg', thumb: '/galeria/evento-08-thumb.jpeg' },
-  { tipo: 'foto', src: '/galeria/evento-14.jpeg', thumb: '/galeria/evento-14-thumb.jpeg' },
-  { tipo: 'foto', src: '/galeria/evento-15.jpeg', thumb: '/galeria/evento-15-thumb.jpeg' },
-  { tipo: 'foto', src: '/galeria/evento-18.jpeg', thumb: '/galeria/evento-18-thumb.jpeg' },
-  { tipo: 'foto', src: '/galeria/evento-19.jpeg', thumb: '/galeria/evento-19-thumb.jpeg' },
-  { tipo: 'foto', src: '/galeria/evento-21.jpeg', thumb: '/galeria/evento-21-thumb.jpeg' },
-  { tipo: 'foto', src: '/galeria/evento-22.jpeg', thumb: '/galeria/evento-22-thumb.jpeg' },
-  { tipo: 'foto', src: '/galeria/evento-23.jpeg', thumb: '/galeria/evento-23-thumb.jpeg' },
-  { tipo: 'foto', src: '/galeria/evento-24.jpeg', thumb: '/galeria/evento-24-thumb.jpeg' },
+  { tipo: 'foto', src: '/galeria/evento-03.jpeg', thumb: '/galeria/evento-03-thumb.jpeg', alt: 'Integrante del equipo de Catering Alba junto a un letrero de bienvenida para una fiesta de quince años' },
+  { tipo: 'video', src: '/galeria/evento-video.mp4', thumb: '/galeria/evento-video-poster.jpeg', alt: 'Video de un evento montado por Catering Alba' },
+  { tipo: 'foto', src: '/galeria/evento-16.jpeg', thumb: '/galeria/evento-16-thumb.jpeg', alt: 'Arco circular dorado con tela drapeada verde y dorada, decorado con flores blancas' },
+  { tipo: 'foto', src: '/galeria/evento-04.jpeg', thumb: '/galeria/evento-04-thumb.jpeg', alt: 'Salón rústico de madera con cortinas rojo vino y dorado, mesa vestida para una boda' },
+  { tipo: 'foto', src: '/galeria/evento-05.jpeg', thumb: '/galeria/evento-05-thumb.jpeg', alt: 'Centro de mesa con flores rosadas sobre mantel dorado, con copas y platos dorados' },
+  { tipo: 'foto', src: '/galeria/evento-02.jpeg', thumb: '/galeria/evento-02-thumb.jpeg', alt: 'Fila de mesas con manteles verde esmeralda y sillas con moños verdes y dorados' },
+  { tipo: 'foto', src: '/galeria/evento-01.jpeg', thumb: '/galeria/evento-01-thumb.jpeg', alt: 'Mesa principal con mantel blanco y moños verde esmeralda y dorado en un salón de bodas' },
+  { tipo: 'foto', src: '/galeria/evento-06.jpeg', thumb: '/galeria/evento-06-thumb.jpeg', alt: 'Mesa con mantel color champán y sillas con moños azul marino junto a la barra de servicio' },
+  { tipo: 'foto', src: '/galeria/evento-07.jpeg', thumb: '/galeria/evento-07-thumb.jpeg', alt: 'Mesas con manteles negros y dorados y moños verde esmeralda, numeradas para los invitados' },
+  { tipo: 'foto', src: '/galeria/evento-13.jpeg', thumb: '/galeria/evento-13-thumb.jpeg', alt: 'Mesa redonda con mantel verde lima y dorado, centro de flores blancas y platos dorados' },
+  { tipo: 'foto', src: '/galeria/evento-09.jpeg', thumb: '/galeria/evento-09-thumb.jpeg', alt: 'Salón con vista al bosque, mesas con manteles vino tinto y dorado y sillas con moños azul marino' },
+  { tipo: 'foto', src: '/galeria/evento-10.jpeg', thumb: '/galeria/evento-10-thumb.jpeg', alt: 'Centro de mesa con eucalipto y flores rosadas sobre tronco de madera' },
+  { tipo: 'foto', src: '/galeria/evento-11.jpeg', thumb: '/galeria/evento-11-thumb.jpeg', alt: 'Terraza con vista al bosque montada para una boda al aire libre' },
+  { tipo: 'foto', src: '/galeria/evento-12.jpeg', thumb: '/galeria/evento-12-thumb.jpeg', alt: 'Mesa con mantel plateado en terraza con vista a las montañas' },
+  { tipo: 'foto', src: '/galeria/evento-17.jpeg', thumb: '/galeria/evento-17-thumb.jpeg', alt: 'Salón de madera con telas rosadas y azul marino colgando del techo, mesas vestidas para una boda' },
+  { tipo: 'foto', src: '/galeria/evento-20.jpeg', thumb: '/galeria/evento-20-thumb.jpeg', alt: 'Terraza techada con cortinas blancas y vista a la calle, mesa decorada al fondo' },
+  { tipo: 'foto', src: '/galeria/evento-08.jpeg', thumb: '/galeria/evento-08-thumb.jpeg', alt: 'Centro de mesa infantil con botellas decoradas y flores en tonos menta' },
+  { tipo: 'foto', src: '/galeria/evento-14.jpeg', thumb: '/galeria/evento-14-thumb.jpeg', alt: 'Fiesta temática retro con telas de colores vivos y sillas con moños multicolor' },
+  { tipo: 'foto', src: '/galeria/evento-15.jpeg', thumb: '/galeria/evento-15-thumb.jpeg', alt: 'Salón decorado en tonos verde y naranja para una fiesta infantil' },
+  { tipo: 'foto', src: '/galeria/evento-18.jpeg', thumb: '/galeria/evento-18-thumb.jpeg', alt: 'Mesas circulares con manteles verde oliva y sillas blancas con moños dorados y verdes' },
+  { tipo: 'foto', src: '/galeria/evento-19.jpeg', thumb: '/galeria/evento-19-thumb.jpeg', alt: 'Telón rosado con guirnalda floral y letrero conmemorativo junto a equipo de sonido' },
+  { tipo: 'foto', src: '/galeria/evento-21.jpeg', thumb: '/galeria/evento-21-thumb.jpeg', alt: 'Salón de gala en azul marino con centros de mesa iluminados y vajilla lista para el servicio' },
+  { tipo: 'foto', src: '/galeria/evento-22.jpeg', thumb: '/galeria/evento-22-thumb.jpeg', alt: 'Detalle de arreglo floral con rosas blancas y follaje sobre tela dorada' },
+  { tipo: 'foto', src: '/galeria/evento-23.jpeg', thumb: '/galeria/evento-23-thumb.jpeg', alt: 'Estación de buffet con marmitas de acero en salón decorado de verde jade y dorado' },
+  { tipo: 'foto', src: '/galeria/evento-24.jpeg', thumb: '/galeria/evento-24-thumb.jpeg', alt: 'Salón con vista a las montañas, mesas vestidas en dorado y morado para una boda' },
 ]
 
 /* =================================================================
@@ -343,7 +343,7 @@ function Header({ activo, irA }) {
     <header className={`encabezado ${scrolled ? 'encabezado--scroll' : ''}`}>
       <div className="envoltura encabezado__fila">
         <div className="encabezado__grupo encabezado__grupo--izq">
-          <nav className="encabezado__nav">
+          <nav className="encabezado__nav" aria-label="Navegación principal — Inicio, Nosotros y Servicios">
             {NAV_IZQ.map((n) => (
               <a
                 key={n.id}
@@ -373,7 +373,7 @@ function Header({ activo, irA }) {
         </a>
 
         <div className="encabezado__grupo encabezado__grupo--der">
-          <nav className="encabezado__nav">
+          <nav className="encabezado__nav" aria-label="Navegación principal — Menú, Galería y Contacto">
             {NAV_DER.map((n) => (
               <a
                 key={n.id}
@@ -400,7 +400,9 @@ function Header({ activo, irA }) {
 
           <button
             className="encabezado__hamburguesa"
-            aria-label="Abrir menú"
+            aria-label={menuAbierto ? 'Cerrar menú' : 'Abrir menú'}
+            aria-expanded={menuAbierto}
+            aria-controls="menu-movil"
             onClick={() => setMenuAbierto((v) => !v)}
           >
             <span />
@@ -411,7 +413,8 @@ function Header({ activo, irA }) {
       </div>
 
       {menuAbierto && (
-        <div className="encabezado__movil">
+        <div className="encabezado__movil" id="menu-movil">
+          <nav aria-label="Menú de navegación móvil" className="encabezado__movil-nav">
           {NAV.map((n) => (
             <a
               key={n.id}
@@ -425,6 +428,7 @@ function Header({ activo, irA }) {
               {n.label}
             </a>
           ))}
+          </nav>
           <a href={`https://wa.me/${CONTACTO.telefonoWa}`} target="_blank" rel="noreferrer">
             <IconWhatsApp /> {CONTACTO.telefonoDisplay}
           </a>
@@ -825,9 +829,18 @@ function Menu() {
 
 function Galeria() {
   const [abierto, setAbierto] = useState(null)
+  const disparadorRef = useRef(null)
+  const cerrarBtnRef = useRef(null)
+  const lightboxRef = useRef(null)
 
-  const abrir = (i) => setAbierto(i)
-  const cerrar = () => setAbierto(null)
+  const abrir = (i, e) => {
+    disparadorRef.current = e?.currentTarget || null
+    setAbierto(i)
+  }
+  const cerrar = () => {
+    setAbierto(null)
+    if (disparadorRef.current) disparadorRef.current.focus()
+  }
   const anterior = (e) => {
     e.stopPropagation()
     setAbierto((i) => (i - 1 + GALERIA.length) % GALERIA.length)
@@ -839,10 +852,34 @@ function Galeria() {
 
   useEffect(() => {
     if (abierto === null) return
+
+    // Mover el foco al abrir el lightbox
+    cerrarBtnRef.current?.focus()
+
     const onKey = (e) => {
-      if (e.key === 'Escape') cerrar()
+      if (e.key === 'Escape') {
+        cerrar()
+        return
+      }
       if (e.key === 'ArrowLeft') setAbierto((i) => (i - 1 + GALERIA.length) % GALERIA.length)
       if (e.key === 'ArrowRight') setAbierto((i) => (i + 1) % GALERIA.length)
+
+      // Trampa de foco: mantener el tab dentro del lightbox
+      if (e.key === 'Tab' && lightboxRef.current) {
+        const enfocables = lightboxRef.current.querySelectorAll(
+          'button, [href], video, [tabindex]:not([tabindex="-1"])'
+        )
+        if (enfocables.length === 0) return
+        const primero = enfocables[0]
+        const ultimo = enfocables[enfocables.length - 1]
+        if (e.shiftKey && document.activeElement === primero) {
+          e.preventDefault()
+          ultimo.focus()
+        } else if (!e.shiftKey && document.activeElement === ultimo) {
+          e.preventDefault()
+          primero.focus()
+        }
+      }
     }
     window.addEventListener('keydown', onKey)
     document.body.style.overflow = 'hidden'
@@ -872,8 +909,8 @@ function Galeria() {
         <div className="rejilla-galeria">
           {GALERIA.map((g, i) => (
             <Reveal key={g.src} delay={(i % 6) * 60}>
-              <button className="galeria-item" onClick={() => abrir(i)} aria-label="Ver imagen">
-                <img src={g.thumb} alt="Evento Catering Alba" />
+              <button className="galeria-item" onClick={(e) => abrir(i, e)} aria-label={`Ampliar: ${g.alt}`}>
+                <img src={g.thumb} alt={g.alt} />
                 {g.tipo === 'video' && (
                   <span className="galeria-item__play">
                     <IconPlay />
@@ -886,11 +923,18 @@ function Galeria() {
       </div>
 
       {item && (
-        <div className="lightbox" onClick={cerrar}>
-          <button className="lightbox__cerrar" onClick={cerrar} aria-label="Cerrar">
+        <div
+          className="lightbox"
+          onClick={cerrar}
+          ref={lightboxRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label={item.alt}
+        >
+          <button className="lightbox__cerrar" onClick={cerrar} aria-label="Cerrar" ref={cerrarBtnRef}>
             <IconCerrar />
           </button>
-          <button className="lightbox__nav lightbox__nav--izq" onClick={anterior} aria-label="Anterior">
+          <button className="lightbox__nav lightbox__nav--izq" onClick={anterior} aria-label="Imagen anterior">
             <IconFlecha direccion="izq" />
           </button>
           <div className="lightbox__contenido" onClick={(e) => e.stopPropagation()}>
@@ -902,12 +946,13 @@ function Galeria() {
                 autoPlay
                 playsInline
                 className="lightbox__media"
+                aria-label={item.alt}
               />
             ) : (
-              <img src={item.src} alt="Evento Catering Alba" className="lightbox__media" />
+              <img src={item.src} alt={item.alt} className="lightbox__media" />
             )}
           </div>
-          <button className="lightbox__nav lightbox__nav--der" onClick={siguiente} aria-label="Siguiente">
+          <button className="lightbox__nav lightbox__nav--der" onClick={siguiente} aria-label="Imagen siguiente">
             <IconFlecha direccion="der" />
           </button>
         </div>
@@ -1000,14 +1045,19 @@ export default function App() {
 
   return (
     <div className="pagina">
+      <a href="#inicio" className="salto-contenido">
+        Saltar al contenido principal
+      </a>
       <Header activo={activo} irA={irA} />
-      <Hero irA={irA} />
-      <Nosotros />
-      <Servicios />
-      <AccesosRapidos irA={irA} />
-      <Menu />
-      <Galeria />
-      <Contacto />
+      <main>
+        <Hero irA={irA} />
+        <Nosotros />
+        <Servicios />
+        <AccesosRapidos irA={irA} />
+        <Menu />
+        <Galeria />
+        <Contacto />
+      </main>
       <Pie />
     </div>
   )
