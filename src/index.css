@@ -742,6 +742,151 @@ a {
   font-weight: 300;
 }
 
+/* ---------- galería ---------- */
+
+.rejilla-galeria {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+@media (min-width: 640px) {
+  .rejilla-galeria {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .rejilla-galeria {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.galeria-item {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  padding: 0;
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #111;
+  cursor: pointer;
+}
+
+.galeria-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), filter 0.3s ease;
+  filter: grayscale(0.15) brightness(0.92);
+}
+
+.galeria-item:hover img {
+  transform: scale(1.06);
+  filter: grayscale(0) brightness(1);
+}
+
+.galeria-item__play {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.35);
+  color: #fff;
+}
+
+.galeria-item__play svg {
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 999px;
+  padding: 12px;
+  box-sizing: content-box;
+}
+
+/* ---------- lightbox ---------- */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(5, 5, 5, 0.94);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  animation: lightbox-in 0.25s ease;
+}
+
+@keyframes lightbox-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.lightbox__contenido {
+  max-width: 92vw;
+  max-height: 86vh;
+}
+
+.lightbox__media {
+  max-width: 92vw;
+  max-height: 86vh;
+  border-radius: 10px;
+  display: block;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox__cerrar {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  border: 1px solid var(--borde-claro);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  display: grid;
+  place-items: center;
+}
+
+.lightbox__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid var(--borde-claro);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  display: grid;
+  place-items: center;
+}
+
+.lightbox__nav--izq {
+  left: 16px;
+}
+
+.lightbox__nav--der {
+  right: 16px;
+}
+
+@media (min-width: 760px) {
+  .lightbox__nav--izq {
+    left: 32px;
+  }
+  .lightbox__nav--der {
+    right: 32px;
+  }
+}
+
 /* ---------- CTA / contacto ---------- */
 
 .seccion-cta {
