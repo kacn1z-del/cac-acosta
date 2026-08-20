@@ -15,6 +15,7 @@ const NAV = [
   { id: 'nosotros', label: 'Nosotros' },
   { id: 'servicios', label: 'Servicios' },
   { id: 'menu', label: 'Menú' },
+  { id: 'galeria', label: 'Galería' },
   { id: 'contacto', label: 'Contacto' },
 ]
 
@@ -89,6 +90,34 @@ const BENEFICIOS = [
   'Montaje y decoración de mesa incluidos',
   'Servicio de meseros uniformados',
   'Degustación previa disponible',
+]
+
+const GALERIA = [
+  { tipo: 'foto', src: '/galeria/evento-03.jpg', thumb: '/galeria/evento-03-thumb.jpg' },
+  { tipo: 'video', src: '/galeria/evento-video.mp4', thumb: '/galeria/evento-video-poster.jpg' },
+  { tipo: 'foto', src: '/galeria/evento-16.jpg', thumb: '/galeria/evento-16-thumb.jpg' },
+  { tipo: 'foto', src: '/galeria/evento-04.jpg', thumb: '/galeria/evento-04-thumb.jpg' },
+  { tipo: 'foto', src: '/galeria/evento-05.jpg', thumb: '/galeria/evento-05-thumb.jpg' },
+  { tipo: 'foto', src: '/galeria/evento-02.jpg', thumb: '/galeria/evento-02-thumb.jpg' },
+  { tipo: 'foto', src: '/galeria/evento-01.jpg', thumb: '/galeria/evento-01-thumb.jpg' },
+  { tipo: 'foto', src: '/galeria/evento-06.jpg', thumb: '/galeria/evento-06-thumb.jpg' },
+  { tipo: 'foto', src: '/galeria/evento-07.jpg', thumb: '/galeria/evento-07-thumb.jpg' },
+  { tipo: 'foto', src: '/galeria/evento-13.jpg', thumb: '/galeria/evento-13-thumb.jpg' },
+  { tipo: 'foto', src: '/galeria/evento-09.jpg', thumb: '/galeria/evento-09-thumb.jpg' },
+  { tipo: 'foto', src: '/galeria/evento-10.jpg', thumb: '/galeria/evento-10-thumb.jpg' },
+  { tipo: 'foto', src: '/galeria/evento-11.jpg', thumb: '/galeria/evento-11-thumb.jpg' },
+  { tipo: 'foto', src: '/galeria/evento-12.jpg', thumb: '/galeria/evento-12-thumb.jpg' },
+  { tipo: 'foto', src: '/galeria/evento-17.jpg', thumb: '/galeria/evento-17-thumb.jpg' },
+  { tipo: 'foto', src: '/galeria/evento-20.jpg', thumb: '/galeria/evento-20-thumb.jpg' },
+  { tipo: 'foto', src: '/galeria/evento-08.jpg', thumb: '/galeria/evento-08-thumb.jpg' },
+  { tipo: 'foto', src: '/galeria/evento-14.jpg', thumb: '/galeria/evento-14-thumb.jpg' },
+  { tipo: 'foto', src: '/galeria/evento-15.jpg', thumb: '/galeria/evento-15-thumb.jpg' },
+  { tipo: 'foto', src: '/galeria/evento-18.jpg', thumb: '/galeria/evento-18-thumb.jpg' },
+  { tipo: 'foto', src: '/galeria/evento-19.jpg', thumb: '/galeria/evento-19-thumb.jpg' },
+  { tipo: 'foto', src: '/galeria/evento-21.jpg', thumb: '/galeria/evento-21-thumb.jpg' },
+  { tipo: 'foto', src: '/galeria/evento-22.jpg', thumb: '/galeria/evento-22-thumb.jpg' },
+  { tipo: 'foto', src: '/galeria/evento-23.jpg', thumb: '/galeria/evento-23-thumb.jpg' },
+  { tipo: 'foto', src: '/galeria/evento-24.jpg', thumb: '/galeria/evento-24-thumb.jpg' },
 ]
 
 /* =================================================================
@@ -208,6 +237,30 @@ function IconAjuste() {
 }
 
 const ICONOS_CARACTERISTICA = [IconEstrella, IconPlato, IconReloj, IconAjuste]
+
+function IconPlay() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M8 5v14l11-7Z" />
+    </svg>
+  )
+}
+
+function IconCerrar() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+      <path d="M5 5l14 14M19 5 5 19" />
+    </svg>
+  )
+}
+
+function IconFlecha({ direccion = 'izq' }) {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+      {direccion === 'izq' ? <path d="M15 5 8 12l7 7" /> : <path d="M9 5l7 7-7 7" />}
+    </svg>
+  )
+}
 
 /* =================================================================
    HEADER
@@ -499,6 +552,103 @@ function Menu() {
 }
 
 /* =================================================================
+   GALERÍA
+   ================================================================= */
+
+function Galeria() {
+  const [abierto, setAbierto] = useState(null)
+
+  const abrir = (i) => setAbierto(i)
+  const cerrar = () => setAbierto(null)
+  const anterior = (e) => {
+    e.stopPropagation()
+    setAbierto((i) => (i - 1 + GALERIA.length) % GALERIA.length)
+  }
+  const siguiente = (e) => {
+    e.stopPropagation()
+    setAbierto((i) => (i + 1) % GALERIA.length)
+  }
+
+  useEffect(() => {
+    if (abierto === null) return
+    const onKey = (e) => {
+      if (e.key === 'Escape') cerrar()
+      if (e.key === 'ArrowLeft') setAbierto((i) => (i - 1 + GALERIA.length) % GALERIA.length)
+      if (e.key === 'ArrowRight') setAbierto((i) => (i + 1) % GALERIA.length)
+    }
+    window.addEventListener('keydown', onKey)
+    document.body.style.overflow = 'hidden'
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      document.body.style.overflow = ''
+    }
+  }, [abierto])
+
+  const item = abierto !== null ? GALERIA[abierto] : null
+
+  return (
+    <section id="galeria" className="seccion seccion--oscura">
+      <div className="envoltura">
+        <Reveal>
+          <div className="cabecera-seccion">
+            <div>
+              <span className="ojo-etiqueta ojo-etiqueta--claro">— Eventos realizados</span>
+              <h2 className="titulo-seccion titulo-seccion--claro">Galería</h2>
+            </div>
+            <p className="nota-seccion nota-seccion--clara">
+              Un vistazo a algunas de las bodas, quinceaños y celebraciones que hemos montado.
+            </p>
+          </div>
+        </Reveal>
+
+        <div className="rejilla-galeria">
+          {GALERIA.map((g, i) => (
+            <Reveal key={g.src} delay={(i % 6) * 60}>
+              <button className="galeria-item" onClick={() => abrir(i)} aria-label="Ver imagen">
+                <img src={g.thumb} alt="Evento Catering Alba" loading="lazy" />
+                {g.tipo === 'video' && (
+                  <span className="galeria-item__play">
+                    <IconPlay />
+                  </span>
+                )}
+              </button>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+
+      {item && (
+        <div className="lightbox" onClick={cerrar}>
+          <button className="lightbox__cerrar" onClick={cerrar} aria-label="Cerrar">
+            <IconCerrar />
+          </button>
+          <button className="lightbox__nav lightbox__nav--izq" onClick={anterior} aria-label="Anterior">
+            <IconFlecha direccion="izq" />
+          </button>
+          <div className="lightbox__contenido" onClick={(e) => e.stopPropagation()}>
+            {item.tipo === 'video' ? (
+              <video
+                src={item.src}
+                poster={item.thumb}
+                controls
+                autoPlay
+                playsInline
+                className="lightbox__media"
+              />
+            ) : (
+              <img src={item.src} alt="Evento Catering Alba" className="lightbox__media" />
+            )}
+          </div>
+          <button className="lightbox__nav lightbox__nav--der" onClick={siguiente} aria-label="Siguiente">
+            <IconFlecha direccion="der" />
+          </button>
+        </div>
+      )}
+    </section>
+  )
+}
+
+/* =================================================================
    CONTACTO
    ================================================================= */
 
@@ -587,6 +737,7 @@ export default function App() {
       <Nosotros />
       <Servicios />
       <Menu />
+      <Galeria />
       <Contacto />
       <Pie />
     </div>
